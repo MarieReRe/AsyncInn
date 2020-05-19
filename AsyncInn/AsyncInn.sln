@@ -5,6 +5,24 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncInn", "AsyncInn\AsyncInn.csproj", "{49D108CF-23A7-4C53-9E60-387D60EF5DF5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{05D8A281-9B0B-4C01-977F-62B588D947F7}"
+	ProjectSection(SolutionItems) = preProject
+		DbContext.cs = DbContext.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wwwroot", "wwwroot", "{FC2A5EC7-A7E1-4E48-A8A8-DA6BC74D4556}"
+	ProjectSection(SolutionItems) = preProject
+		style.css = style.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{1B0B16CA-C09D-4990-9FCA-7B0EAC871748}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{0C891FDD-1128-458C-97A9-10DEDFA20B4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{6B19291A-C48D-412B-AE44-BCF2F21CAF6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Home", "Home", "{54208540-C8F1-43C3-90D6-D6555D687A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54208540-C8F1-43C3-90D6-D6555D687A72} = {0C891FDD-1128-458C-97A9-10DEDFA20B4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C13B665C-23D1-4051-8CE8-FD490ED4EB14}

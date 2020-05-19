@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AsyncInn.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,9 +28,10 @@ namespace AsyncInn
             services.AddMvc();
 
             //3. Register DBContext
-            services.AddDbContext<>( =>
+            services.AddDbContext<AsyncInnDbContext>( options =>
             {
-
+                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connectionString);
             });
         }
 

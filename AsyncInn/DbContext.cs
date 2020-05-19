@@ -1,8 +1,14 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore
 
-public class Class1
+namespace AsyncInn.Data
 {
-	public Class1()
-	{
-	}
+    public class AsyncInnDbContext : DbContext
+    {
+        public AsyncInnDbContext(DbContextOptions<AsyncDbContext> options) : base(options)
+        {
+
+        }
+
+    }
 }

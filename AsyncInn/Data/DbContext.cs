@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AsyncInn.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Data
@@ -14,5 +15,19 @@ namespace AsyncInn.Data
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Hotel>()
+                .HasData(new Hotel
+                {
+                    ID = 1,
+                    HotelName = "Hotel Vulcano Porto",
+                    StreetAddress = "Via Nazionale 3",
+                    City = "Salina",
+                    State = "Malfa",
+                    Country = "Italy",
+                });
+        }  
+        public DbSet<Hotel> Hotel { get; set; }
     }
 }

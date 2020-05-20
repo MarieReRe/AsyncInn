@@ -27,7 +27,15 @@ namespace AsyncInn.Data
                     State = "Malfa",
                     Country = "Italy",
                 });
+
+            modelBuilder.Entity<HotelRoom>()
+                .HasKey(hotelRoom => new
+                {
+                    hotelRoom.HotelId,
+                    hotelRoom.RoomNumber,
+                });
         }  
         public DbSet<Hotel> Hotel { get; set; }
+        public DbSet<HotelRoom> HotelRoom { get; set; }
     }
 }

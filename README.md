@@ -15,5 +15,5 @@
 # Change Log
 v1.0 ERD and Project created 19 May 2020
 
-v2.0 
+v2.0 Updated Diagram 20 May 2020
 

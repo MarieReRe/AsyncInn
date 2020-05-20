@@ -40,26 +40,35 @@ namespace AsyncInn.Data
                 {
                     ID = 1, 
                     Name = "Charming Room",
-                    Style = 1,
+                    Style = Style.CoastalView,
                     MaxGuests = 2,
-                });
-            modelBuilder.Entity<Room>()
-              .HasData(new Room
-              {
-                  ID = 2,
-                  Name = "Superior Room - Pool Floor",
-                  Style = 1,
-                  MaxGuests = 2,
-              });
-            modelBuilder.Entity<Room>()
-            .HasData(new Room
-            {
-                ID = 3,
-                Name = "Superior Room - Top Floor",
-                Style = 1,
-                MaxGuests = 2,
-            });
+                    BedCount = 1,
+                    BedStyle = BedStyle.QueenSize,
 
+
+                 
+                    
+                },
+                new Room
+                {
+                    ID = 2,
+                    Name = "Superior Room - Pool Floor",
+                    Style = Style.PoolView,
+                    MaxGuests = 2,
+                    BedCount = 1,
+                    BedStyle = BedStyle.KingSize,
+                },
+                new Room
+                {
+                    ID = 3,
+                    Name = "Superior Room - Top Floor",
+                    Style = Style.Penthouse,
+                    MaxGuests = 2,
+                    BedCount = 1,
+                    BedStyle = BedStyle.KingSize,
+                });
+         
+           
         }  
         public DbSet<Hotel> Hotel { get; set; }
         public DbSet<HotelRoom> HotelRoom { get; set; }

@@ -7,7 +7,7 @@
 # Set Up and Start
 
 # ERD
-![ERD](https://github.com/mrsantons/AsyncInn/blob/master/Visuals/AsyncInn.jpg)
+![ERD](https://github.com/mrsantons/AsyncInn/blob/master/Visuals/AsyncInn.png)
 
 # Visuals
 

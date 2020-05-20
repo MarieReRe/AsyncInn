@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models
 {
-    public class HotelRoom
+    public class Room
     {
-        public long HotelId { get; set; }
-        public int RoomId { get; set; }
+        public long ID { get; set; }
 
         [Required]
-        public int RoomNumber { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public decimal Rate { get; set; }
+        public int Style { get; set; }
 
         [Required]
-        public Room Room { get; set; }
+        public int MaxGuests { get; set; }
     }
 }

@@ -9,7 +9,8 @@ namespace AsyncInn.Models
     public class HotelRoom
     {
         public long HotelId { get; set; }
-        public int RoomId { get; set; }
+        public Hotel Hotel { get; set; }
+        
 
         [Required]
         public int RoomNumber { get; set; }
@@ -19,5 +20,7 @@ namespace AsyncInn.Models
 
         [Required]
         public Room Room { get; set; }
+
+        public long RoomId { get; set; }
     }
 }

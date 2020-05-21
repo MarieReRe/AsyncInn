@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    [Migration("20200520201043_AddRoomTable")]
+    [Migration("20200521224018_AddRoomTable")]
     partial class AddRoomTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,15 +74,12 @@ namespace AsyncInn.Migrations
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("RoomID")
+                    b.Property<long>("RoomId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
 
                     b.HasKey("HotelId", "RoomNumber");
 
-                    b.HasIndex("RoomID");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("HotelRoom");
                 });
@@ -93,6 +90,12 @@ namespace AsyncInn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BedStyle")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaxGuests")
                         .HasColumnType("int");
@@ -112,31 +115,43 @@ namespace AsyncInn.Migrations
                         new
                         {
                             ID = 1L,
+                            BedCount = 1,
+                            BedStyle = 1,
                             MaxGuests = 2,
                             Name = "Charming Room",
-                            Style = 1
+                            Style = 2
                         },
                         new
                         {
                             ID = 2L,
+                            BedCount = 1,
+                            BedStyle = 0,
                             MaxGuests = 2,
                             Name = "Superior Room - Pool Floor",
-                            Style = 1
+                            Style = 0
                         },
                         new
                         {
                             ID = 3L,
+                            BedCount = 1,
+                            BedStyle = 0,
                             MaxGuests = 2,
                             Name = "Superior Room - Top Floor",
-                            Style = 1
+                            Style = 3
                         });
                 });
 
             modelBuilder.Entity("AsyncInn.Models.HotelRoom", b =>
                 {
+                    b.HasOne("AsyncInn.Models.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AsyncInn.Models.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

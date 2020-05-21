@@ -15,6 +15,7 @@ namespace AsyncInn.Data
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Hotel>()
@@ -70,6 +71,10 @@ namespace AsyncInn.Data
          
            
         }  
+
+
+
+
         public DbSet<Hotel> Hotel { get; set; }
         public DbSet<HotelRoom> HotelRoom { get; set; }
         public DbSet<Room> Room { get; set; }

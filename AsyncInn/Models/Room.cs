@@ -25,6 +25,7 @@ namespace AsyncInn.Models
         [Required]
         public BedStyle BedStyle { get; set; }
     }
+    //Flags enum
     public enum Style
     {
         PoolView,

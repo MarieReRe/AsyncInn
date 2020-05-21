@@ -72,15 +72,12 @@ namespace AsyncInn.Migrations
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("RoomID")
+                    b.Property<long>("RoomId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
 
                     b.HasKey("HotelId", "RoomNumber");
 
-                    b.HasIndex("RoomID");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("HotelRoom");
                 });
@@ -144,9 +141,15 @@ namespace AsyncInn.Migrations
 
             modelBuilder.Entity("AsyncInn.Models.HotelRoom", b =>
                 {
+                    b.HasOne("AsyncInn.Models.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AsyncInn.Models.Room", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomID")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

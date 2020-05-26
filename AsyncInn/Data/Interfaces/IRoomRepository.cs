@@ -16,7 +16,7 @@ namespace AsyncInn.Data.Interfaces
         Task<List<Room>> GetRooms();
 
         //U: Update
-    
+        Task UpdateRoom(Room room);
 
         //D: Delete
     

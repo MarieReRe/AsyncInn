@@ -30,9 +30,9 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<Hotel> GetHotelById(long id)
+        public async Task<Hotel> GetHotelById(long id)
         {
-            throw new NotImplementedException();
+            return await _context.Hotel.FindAsync(id);
         }
 
         public Task<List<Hotel>> GetHotels()

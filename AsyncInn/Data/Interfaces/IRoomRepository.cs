@@ -12,8 +12,8 @@ namespace AsyncInn.Data.Interfaces
         Task CreateRoom(Room room);
 
         //R: Read
-      
-   
+        Task<Room> GetRoomById(long id);
+        Task<List<Room>> GetRooms();
 
         //U: Update
     

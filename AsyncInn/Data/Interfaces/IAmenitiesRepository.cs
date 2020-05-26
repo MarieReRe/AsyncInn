@@ -12,7 +12,7 @@ namespace AsyncInn.Data.Interfaces
         Task CreateAmenities(Amenities amenities);
 
         //R: Read
-       
+        Task<Amenities> GetAmenitiesById(int id);
 
         //U: Update
         

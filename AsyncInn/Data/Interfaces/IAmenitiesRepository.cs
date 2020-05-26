@@ -18,6 +18,8 @@ namespace AsyncInn.Data.Interfaces
         Task<Amenities> UpdateAmenities(Amenities amenities);
 
         //D: Delete
-        
+        Task DeleteAmenities(int id);
+        Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID);
+
     }
 }

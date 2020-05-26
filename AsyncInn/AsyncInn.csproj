@@ -12,6 +12,10 @@
     <Compile Remove="Migrations\20200520203346_FixRoomInformation.Designer.cs" />
     <Compile Remove="Migrations\20200521223203_RoomTableUpdate.cs" />
     <Compile Remove="Migrations\20200521223203_RoomTableUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200526193811_UpdateRoomAmenities.cs" />
+    <Compile Remove="Migrations\20200526193811_UpdateRoomAmenities.Designer.cs" />
+    <Compile Remove="Migrations\20200526194420_UpdateRoomAmenitiesTableAgain.cs" />
+    <Compile Remove="Migrations\20200526194420_UpdateRoomAmenitiesTableAgain.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

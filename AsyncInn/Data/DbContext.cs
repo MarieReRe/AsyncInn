@@ -68,8 +68,17 @@ namespace AsyncInn.Data
                     BedCount = 1,
                     BedStyle = BedStyle.KingSize,
                 });
-         
-           
+
+
+            modelBuilder.Entity<RoomAmenities>()
+                .HasKey(roomAmenities => new
+                {
+                    roomAmenities.AmenitiesId,
+                    roomAmenities.RoomId
+
+                }) ;
+
+
         }  
 
 
@@ -78,6 +87,7 @@ namespace AsyncInn.Data
         public DbSet<Hotel> Hotel { get; set; }
         public DbSet<HotelRoom> HotelRoom { get; set; }
         public DbSet<Room> Room { get; set; }
-        public DbSet<AsyncInn.Models.Amenities> Amenities { get; set; }
+        public DbSet<Amenities> Amenities { get; set; }
+        public DbSet<RoomAmenities> RoomAmenities { get; set;}
     }
 }

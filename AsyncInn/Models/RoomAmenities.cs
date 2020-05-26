@@ -9,9 +9,9 @@ namespace AsyncInn.Models
     public class RoomAmenities
     {
         public int AmenitiesId { get; set; }
-        public int RoomId { get; set; }
 
-
+        public long RoomId { get; set; }
+      
         //Nav Properties
         public Amenities Amenities { get; set; }
 

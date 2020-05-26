@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-    public interface IHotelRepository
+   public interface IRoomRepository
     {
-   
-
         //C: Create
-        Task<Hotel> CreateHotel(Hotel hotel);
+        Task CreateRoom(Room room);
 
         //R: Read
-        Task<Hotel> GetHotelById(long id);
-        Task<List<Hotel>> GetHotels();
+        Task<Room> GetRoomById(long id);
+        Task<List<Room>> GetRooms();
 
         //U: Update
-        Task UpdateHotel(Hotel hotel);
+        Task UpdateRoom(Room room);
 
         //D: Delete
-        Task DeleteHotel(int id);
+        Task DeleteRoom(long id);
+    
     }
 }

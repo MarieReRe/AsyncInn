@@ -50,9 +50,31 @@ namespace AsyncInn.Data.DatabaseRepositories
             return await _context.Hotel.ToListAsync();
         }
 
-        public Task UpdateHotel(Hotel hotel)
+        public async Task<bool> UpdateHotel(long id, Hotel hotel)
         {
-            throw new NotImplementedException();
+            _context.Entry(hotel).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                if(!HotelExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool HotelExists(long id)
+        {
+            return _context.Hotel.Any(e => e.ID == id);
         }
     }
 }

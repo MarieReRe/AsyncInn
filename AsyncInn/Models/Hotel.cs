@@ -21,5 +21,8 @@ namespace AsyncInn.Models
         [Required]
         public string Country { get; set; }
 
+        //nav prop
+        public ICollection<HotelRoom> HotelRoom { get; set; }
+
     }
 }

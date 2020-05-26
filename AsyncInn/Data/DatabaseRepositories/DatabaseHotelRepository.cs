@@ -25,9 +25,18 @@ namespace AsyncInn.Data.DatabaseRepositories
             return hotel;
         }
 
-        public Task DeleteHotel(int id)
+        public async Task<Hotel> DeleteHotel(int id)
         {
-            throw new NotImplementedException();
+            var hotel = await _context.Hotel.FindAsync(id);
+            if(hotel == null)
+            {
+                return null;
+            }
+            _context.Hotel.Remove(hotel);
+            await _context.SaveChangesAsync();
+
+            return hotel;
+
         }
 
         public async Task<Hotel> GetHotelById(long id)

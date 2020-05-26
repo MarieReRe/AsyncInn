@@ -19,6 +19,7 @@ namespace AsyncInn.Data.Interfaces
         Task UpdateRoom(Room room);
 
         //D: Delete
+        Task DeleteRoom(long id);
     
     }
 }

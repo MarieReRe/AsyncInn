@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +45,9 @@ namespace AsyncInn.Data.DatabaseRepositories
             return await _context.Hotel.FindAsync(id);
         }
 
-        public Task<List<Hotel>> GetHotels()
+        public async Task<IEnumerable<Hotel>> GetHotels()
         {
-            throw new NotImplementedException();
+            return await _context.Hotel.ToListAsync();
         }
 
         public Task UpdateHotel(Hotel hotel)

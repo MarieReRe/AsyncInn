@@ -15,7 +15,7 @@ namespace AsyncInn.Data.Interfaces
         Task<Amenities> GetAmenitiesById(int id);
 
         //U: Update
-        
+        Task<Amenities> UpdateAmenities(Amenities amenities);
 
         //D: Delete
         

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-    interface IHotelRepository
+    public interface IHotelRepository
     {
+   
 
         //C: Create
-        Task CreateHotel(Hotel hotel);
+        Task<Hotel> CreateHotel(Hotel hotel);
 
         //R: Read
         Task<Hotel> GetHotelById(long id);

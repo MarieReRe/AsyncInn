@@ -24,9 +24,9 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public async Task<Amenities> DeleteAmenities(int id)
+        public async Task<Amenities> DeleteAmenities(int amenitiesId)
         {
-            var deletedAmenity = await _context.Amenities.FindAsync(id);
+            var deletedAmenity = await _context.Amenities.FindAsync(amenitiesId);
             if(deletedAmenity == null)
             {
                 return null;
@@ -38,14 +38,10 @@ namespace AsyncInn.Data.DatabaseRepositories
 
 
         }
-        public async Task<IEnumerable<Amenities>> GetAllRoomAmenities(int amenitiesID)
+      
+        public async Task<Amenities> GetAmenitiesById(int amenitiesId)
         {
-            return await _context.Amenities.ToListAsync();
-        }
-
-        public async Task<Amenities> GetAmenitiesById(int id)
-        {
-            return await _context.Amenities.FindAsync(id);
+            return await _context.Amenities.FindAsync(amenitiesId);
         }
 
         
@@ -56,7 +52,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public async Task<bool> UpdateAmenities(int id,Amenities amenities)
+        public async Task<bool> UpdateAmenities(int amenitiesId, Amenities amenities)
         {
             _context.Entry(amenities).State = EntityState.Modified;
 
@@ -67,7 +63,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AmenityExists(id))
+                if (!AmenityExists(amenitiesId))
                 {
                     return false;
                 }
@@ -77,11 +73,14 @@ namespace AsyncInn.Data.DatabaseRepositories
                 }
             }
         }
-        public bool AmenityExists(int id)
+        public bool AmenityExists(int amenitiesId)
         {
-            return _context.Amenities.Any(e => e.ID == id);
+            return _context.Amenities.Any(e => e.ID == amenitiesId);
         }
 
-
+        public async Task<IEnumerable<Amenities>> GetAllRoomAmenities()
+        {
+            return await _context.Amenities.ToListAsync();
+        }
     }
 }

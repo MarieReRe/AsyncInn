@@ -12,15 +12,15 @@ namespace AsyncInn.Data.Interfaces
         Task<Amenities> CreateAmenities(Amenities amenities);
 
         //R: Read
-        Task<Amenities> GetAmenitiesById(int id);
+        Task<Amenities> GetAmenitiesById(int amenitiesId);
 
         //U: Update
-        Task<bool> UpdateAmenities(int id, Amenities amenities);
+        Task<bool> UpdateAmenities(int amenitiesId, Amenities amenities);
         Task<Amenities> SaveNewAmenity(Amenities amenities);
 
         //D: Delete
-        Task<Amenities> DeleteAmenities(int id);
-        Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID);
+        Task<Amenities> DeleteAmenities(int amenitiesId);
+        Task<IEnumerable<Amenities>> GetAllRoomAmenities();
 
     }
 }

@@ -20,7 +20,7 @@ namespace AsyncInn.Migrations
 
             modelBuilder.Entity("AsyncInn.Models.Amenities", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,7 +29,7 @@ namespace AsyncInn.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Amenities");
                 });

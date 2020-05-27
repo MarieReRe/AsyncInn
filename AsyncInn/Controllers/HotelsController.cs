@@ -16,7 +16,6 @@ namespace AsyncInn.Controllers
     public class HotelsController : ControllerBase
     {
         IHotelRepository hotelRepository;
-        private readonly AsyncInnDbContext _context;
 
         public HotelsController(IHotelRepository hotelRepository)
         {
@@ -35,7 +34,7 @@ namespace AsyncInn.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(long id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
+            var hotel = await hotelRepository.GetHotelById(id);
 
             if (hotel == null)
             {

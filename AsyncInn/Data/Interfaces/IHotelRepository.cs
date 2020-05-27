@@ -15,12 +15,13 @@ namespace AsyncInn.Data.Interfaces
 
         //R: Read
         Task<Hotel> GetHotelById(long id);
-        Task<List<Hotel>> GetHotels();
+        Task<IEnumerable<Hotel>> GetHotels();
 
         //U: Update
-        Task UpdateHotel(Hotel hotel);
+        Task<bool> UpdateHotel(long id, Hotel hotel);
+        Task<Hotel> SaveNewHotel(Hotel hotel);
 
         //D: Delete
-        Task DeleteHotel(int id);
+        Task<Hotel> DeleteHotel(long id);
     }
 }

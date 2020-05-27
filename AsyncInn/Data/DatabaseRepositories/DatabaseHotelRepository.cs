@@ -17,16 +17,16 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context = context;
         }
 
-     
 
-        public async Task<Hotel> CreateHotel(Hotel hotel)
+
+        public async Task<Hotel> CreateHotel( Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
             return hotel;
         }
 
-        public async Task<Hotel> DeleteHotel(int id)
+        public async Task<Hotel> DeleteHotel(long id)
         {
             var hotel = await _context.Hotel.FindAsync(id);
             if(hotel == null)
@@ -50,6 +50,13 @@ namespace AsyncInn.Data.DatabaseRepositories
             return await _context.Hotel.ToListAsync();
         }
 
+        public async Task<Hotel> SaveNewHotel(Hotel hotel)
+        {
+            _context.Hotel.Add(hotel);
+            await _context.SaveChangesAsync();
+            return hotel;
+        }
+
         public async Task<bool> UpdateHotel(long id, Hotel hotel)
         {
             _context.Entry(hotel).State = EntityState.Modified;
@@ -71,7 +78,6 @@ namespace AsyncInn.Data.DatabaseRepositories
                 }
             }
         }
-
         private bool HotelExists(long id)
         {
             return _context.Hotel.Any(e => e.ID == id);

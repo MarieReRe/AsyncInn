@@ -9,17 +9,19 @@ namespace AsyncInn.Data.Interfaces
    public interface IRoomRepository
     {
         //C: Create
-        Task CreateRoom(Room room);
+        Task<Room> CreateRoom(Room room);
 
         //R: Read
         Task<Room> GetRoomById(long id);
         Task<List<Room>> GetRooms();
 
         //U: Update
-        Task UpdateRoom(Room room);
+        Task<bool> UpdateRoom(long id, Room room);
+
+        Task<Room> SaveNewRoom(Room room);
 
         //D: Delete
-        Task DeleteRoom(long id);
+        Task<Room> DeleteRoom(long id);
     
     }
 }

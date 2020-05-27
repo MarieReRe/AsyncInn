@@ -22,6 +22,6 @@ namespace AsyncInn.Data.Interfaces
         Task<Hotel> SaveNewHotel(Hotel hotel);
 
         //D: Delete
-        Task DeleteHotel(int id);
+        Task<Hotel> DeleteHotel(int id);
     }
 }

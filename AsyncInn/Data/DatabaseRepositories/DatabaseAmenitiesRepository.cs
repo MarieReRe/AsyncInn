@@ -43,9 +43,9 @@ namespace AsyncInn.Data.DatabaseRepositories
             return await _context.Amenities.ToListAsync();
         }
 
-        public Task<Amenities> GetAmenitiesById(int id)
+        public async Task<Amenities> GetAmenitiesById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Amenities.FindAsync(id);
         }
 
         

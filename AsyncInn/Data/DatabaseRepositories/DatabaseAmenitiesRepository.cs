@@ -23,9 +23,19 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public Task<Amenities> DeleteAmenities(int id)
+        public async Task<Amenities> DeleteAmenities(int id)
         {
-            throw new NotImplementedException();
+            var deletedAmenity = await _context.Amenities.FindAsync(id);
+            if(deletedAmenity == null)
+            {
+                return null;
+            }
+            _context.Amenities.Remove(deletedAmenity);
+            await _context.SaveChangesAsync();
+
+            return deletedAmenity;
+
+
         }
 
         public Task<Amenities> GetAmenitiesById(int id)

@@ -23,7 +23,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public Task DeleteAmenities(int id)
+        public Task<Amenities> DeleteAmenities(int id)
         {
             throw new NotImplementedException();
         }
@@ -47,5 +47,7 @@ namespace AsyncInn.Data.DatabaseRepositories
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

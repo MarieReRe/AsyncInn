@@ -26,7 +26,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return hotel;
         }
 
-        public async Task<Hotel> DeleteHotel(int id)
+        public async Task<Hotel> DeleteHotel(long id)
         {
             var hotel = await _context.Hotel.FindAsync(id);
             if(hotel == null)

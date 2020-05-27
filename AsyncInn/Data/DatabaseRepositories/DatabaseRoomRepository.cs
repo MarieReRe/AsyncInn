@@ -24,22 +24,22 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public Task DeleteRoom(long id)
+        public async Task<Room> DeleteRoom(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Room> GetRoomById(long id)
+        public async Task<Room> GetRoomById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Room>> GetRooms()
+        public async Task<List<Room>> GetRooms()
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateRoom(Room room)
+        public async Task UpdateRoom(Room room)
         {
             throw new NotImplementedException();
         }

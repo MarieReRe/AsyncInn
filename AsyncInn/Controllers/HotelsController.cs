@@ -16,7 +16,6 @@ namespace AsyncInn.Controllers
     public class HotelsController : ControllerBase
     {
         IHotelRepository hotelRepository;
-        private readonly AsyncInnDbContext _context;
 
         public HotelsController(IHotelRepository hotelRepository)
         {
@@ -35,7 +34,7 @@ namespace AsyncInn.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(long id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
+            var hotel = await hotelRepository.GetHotelById(id);
 
             if (hotel == null)
             {
@@ -46,11 +45,11 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/Hotels/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel(long id, Hotel hotel)
         {
+            hotel.ID = id;
             if (id != hotel.ID)
             {
                 return BadRequest();
@@ -58,13 +57,13 @@ namespace AsyncInn.Controllers
 
             bool didUpdate = await hotelRepository.UpdateHotel(id, hotel);
 
-          
-                if (!didUpdate)
-                {
-                    return NotFound();
-                }
-            
-            
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+
 
             return NoContent();
         }
@@ -75,9 +74,7 @@ namespace AsyncInn.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-            _context.Hotel.Add(hotel);
-            await _context.SaveChangesAsync();
-
+            await hotelRepository.SaveNewHotel(hotel);
             return CreatedAtAction("GetHotel", new { id = hotel.ID }, hotel);
         }
 
@@ -85,18 +82,15 @@ namespace AsyncInn.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Hotel>> DeleteHotel(long id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
+            var hotel = await hotelRepository.DeleteHotel(id);
             if (hotel == null)
             {
                 return NotFound();
             }
 
-            _context.Hotel.Remove(hotel);
-            await _context.SaveChangesAsync();
-
             return hotel;
         }
 
-      
+
     }
 }

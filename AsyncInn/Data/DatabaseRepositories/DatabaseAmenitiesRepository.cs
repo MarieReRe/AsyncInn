@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,9 @@ namespace AsyncInn.Data.DatabaseRepositories
 
 
         }
-        public Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID)
+        public async Task<IEnumerable<Amenities>> GetAllRoomAmenities(int amenitiesID)
         {
-            throw new NotImplementedException();
+            return await _context.Amenities.ToListAsync();
         }
 
         public Task<Amenities> GetAmenitiesById(int id)

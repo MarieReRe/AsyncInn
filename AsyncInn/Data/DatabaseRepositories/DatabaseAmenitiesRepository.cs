@@ -75,7 +75,7 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
         public bool AmenityExists(int amenitiesId)
         {
-            return _context.Amenities.Any(e => e.ID == amenitiesId);
+            return _context.Amenities.Any(e => e.Id == amenitiesId);
         }
 
         public async Task<IEnumerable<Amenities>> GetAllRoomAmenities()

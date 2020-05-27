@@ -16,6 +16,12 @@
     <Compile Remove="Migrations\20200526193811_UpdateRoomAmenities.Designer.cs" />
     <Compile Remove="Migrations\20200526194420_UpdateRoomAmenitiesTableAgain.cs" />
     <Compile Remove="Migrations\20200526194420_UpdateRoomAmenitiesTableAgain.Designer.cs" />
+    <Compile Remove="Migrations\20200526194739_UpdatedRoomAmenitiesKeys.cs" />
+    <Compile Remove="Migrations\20200526194739_UpdatedRoomAmenitiesKeys.Designer.cs" />
+    <Compile Remove="Migrations\20200526203032_AddCompositeKey.cs" />
+    <Compile Remove="Migrations\20200526203032_AddCompositeKey.Designer.cs" />
+    <Compile Remove="Migrations\20200527164208_HotelAmen.cs" />
+    <Compile Remove="Migrations\20200527164208_HotelAmen.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +33,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\DTOs\" />
   </ItemGroup>
 
 </Project>

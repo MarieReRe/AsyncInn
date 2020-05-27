@@ -71,8 +71,7 @@ namespace AsyncInn.Controllers
         [HttpPost]
         public async Task<ActionResult<Room>> PostRoom(Room room)
         {
-            _context.Room.Add(room);
-            await _context.SaveChangesAsync();
+            await roomRepository.SaveNewRoom(room);
 
             return CreatedAtAction("GetRoom", new { id = room.ID }, room);
         }
@@ -93,9 +92,6 @@ namespace AsyncInn.Controllers
             return room;
         }
 
-        private bool RoomExists(long id)
-        {
-            return _context.Room.Any(e => e.ID == id);
-        }
+       
     }
 }

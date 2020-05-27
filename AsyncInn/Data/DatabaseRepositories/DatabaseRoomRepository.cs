@@ -68,9 +68,16 @@ namespace AsyncInn.Data.DatabaseRepositories
             }
             
         }
+
         public bool RoomExists(long id)
         {
             return _context.Room.Any(e => e.ID == id);
+        }
+        public async Task<Room> SaveNewRoom(Room room)
+        {
+            _context.Room.Add(room);
+            await _context.SaveChangesAsync();
+            return room;
         }
     }
 }

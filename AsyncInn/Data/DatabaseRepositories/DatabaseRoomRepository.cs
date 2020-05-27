@@ -47,9 +47,19 @@ namespace AsyncInn.Data.DatabaseRepositories
             return await _context.Room.ToListAsync();
         }
 
-        public async Task<Room> UpdateRoom(Room room)
+        public async Task<bool> UpdateRoom(Room room)
         {
-            throw new NotImplementedException();
+            _context.Entry(room).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            
+        }
+        public bool RoomExists(long id)
+        {
+            return _context.Room.Any(e => e.ID == id);
         }
     }
 }

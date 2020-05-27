@@ -1,25 +1,24 @@
 ﻿using AsyncInn.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-   public interface IAmenitiesRepository
+    public interface IAmenitiesRepository
     {
         //C: Create
-        Task CreateAmenities(Amenities amenities);
+        Task<Amenities> CreateAmenities(Amenities amenities);
 
         //R: Read
-        Task<Amenities> GetAmenitiesById(int id);
+        Task<Amenities> GetAmenitiesById(int Id);
 
         //U: Update
-        Task<Amenities> UpdateAmenities(Amenities amenities);
+        Task<bool> UpdateAmenities(int Id, Amenities amenities);
+        Task<Amenities> SaveNewAmenity(Amenities amenities);
 
         //D: Delete
-        Task DeleteAmenities(int id);
-        Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID);
+        Task<Amenities> DeleteAmenities(int Id);
+        Task<IEnumerable<Amenities>> GetAllRoomAmenities();
 
     }
 }

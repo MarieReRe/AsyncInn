@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,77 @@ namespace AsyncInn.Data.DatabaseRepositories
 {
     public class DatabaseAmenitiesRepository : IAmenitiesRepository
     {
-        public Task CreateAmenities(Amenities amenities)
+
+        private readonly AsyncInnDbContext _context;
+
+        public DatabaseAmenitiesRepository(AsyncInnDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<Amenities> CreateAmenities(Amenities amenities)
+        {
+            _context.Amenities.Add(amenities);
+            await _context.SaveChangesAsync();
+            return amenities;
         }
 
-        public Task DeleteAmenities(int id)
+        public async Task<Amenities> DeleteAmenities(int amenitiesId)
         {
-            throw new NotImplementedException();
+            var deletedAmenity = await _context.Amenities.FindAsync(amenitiesId);
+            if(deletedAmenity == null)
+            {
+                return null;
+            }
+            _context.Amenities.Remove(deletedAmenity);
+            await _context.SaveChangesAsync();
+
+            return deletedAmenity;
+
+
+        }
+      
+        public async Task<Amenities> GetAmenitiesById(int amenitiesId)
+        {
+            return await _context.Amenities.FindAsync(amenitiesId);
         }
 
-        public Task<Amenities> GetAmenitiesById(int id)
+        
+        public async Task<Amenities> SaveNewAmenity(Amenities amenities)
         {
-            throw new NotImplementedException();
+            _context.Amenities.Add(amenities);
+            await _context.SaveChangesAsync();
+            return amenities;
         }
 
-        public Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID)
+        public async Task<bool> UpdateAmenities(int amenitiesId, Amenities amenities)
         {
-            throw new NotImplementedException();
+            _context.Entry(amenities).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AmenityExists(amenitiesId))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        public bool AmenityExists(int amenitiesId)
+        {
+            return _context.Amenities.Any(e => e.ID == amenitiesId);
         }
 
-        public Task<Amenities> UpdateAmenities(Amenities amenities)
+        public async Task<IEnumerable<Amenities>> GetAllRoomAmenities()
         {
-            throw new NotImplementedException();
+            return await _context.Amenities.ToListAsync();
         }
     }
 }

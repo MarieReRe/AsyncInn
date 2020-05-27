@@ -26,7 +26,14 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public async Task<Room> DeleteRoom(long id)
         {
-            throw new NotImplementedException();
+            var room = await _context.Room.FindAsync(id);
+            if(room == null)
+            {
+                return null;
+            }
+            _context.Room.Remove(room);
+            await _context.SaveChangesAsync();
+            return room;
         }
 
         public async Task<Room> GetRoomById(long id)

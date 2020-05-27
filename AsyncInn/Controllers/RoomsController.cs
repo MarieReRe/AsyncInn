@@ -53,23 +53,14 @@ namespace AsyncInn.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(room).State = EntityState.Modified;
+            bool updatedRoom = await roomRepository.UpdateRoom(id, room);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoomExists(id))
+           
+                if (!updatedRoom)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
-            }
+              
 
             return NoContent();
         }

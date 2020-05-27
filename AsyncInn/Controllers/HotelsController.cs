@@ -45,7 +45,7 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/Hotels/5
-       
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel(long id, Hotel hotel)
         {
@@ -57,13 +57,13 @@ namespace AsyncInn.Controllers
 
             bool didUpdate = await hotelRepository.UpdateHotel(id, hotel);
 
-          
-                if (!didUpdate)
-                {
-                    return NotFound();
-                }
-            
-            
+
+            if (!didUpdate)
+            {
+                return NotFound();
+            }
+
+
 
             return NoContent();
         }
@@ -82,18 +82,15 @@ namespace AsyncInn.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Hotel>> DeleteHotel(long id)
         {
-            var hotel = await _context.Hotel.FindAsync(id);
+            var hotel = await hotelRepository.DeleteHotel(id);
             if (hotel == null)
             {
                 return NotFound();
             }
 
-            _context.Hotel.Remove(hotel);
-            await _context.SaveChangesAsync();
-
             return hotel;
         }
 
-      
+
     }
 }

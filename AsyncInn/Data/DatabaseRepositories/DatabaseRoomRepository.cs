@@ -17,9 +17,11 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context = context;
         } 
 
-        public Task CreateRoom(Room room)
+        public async Task<Room> CreateRoom(Room room)
         {
-            throw new NotImplementedException();
+            _context.Room.Add(room);
+            await _context.SaveChangesAsync();
+            return room;
         }
 
         public Task DeleteRoom(long id)

@@ -18,7 +18,7 @@ namespace AsyncInn.Data.Interfaces
         Task<IEnumerable<Hotel>> GetHotels();
 
         //U: Update
-        Task UpdateHotel(Hotel hotel);
+        Task<bool> UpdateHotel(long id, Hotel hotel);
 
         //D: Delete
         Task DeleteHotel(int id);

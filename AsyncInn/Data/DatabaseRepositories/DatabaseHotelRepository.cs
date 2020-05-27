@@ -17,9 +17,9 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context = context;
         }
 
-     
 
-        public async Task<Hotel> CreateHotel(Hotel hotel)
+
+        public async Task<Hotel> CreateHotel( Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();

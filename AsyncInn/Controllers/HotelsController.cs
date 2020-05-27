@@ -28,7 +28,7 @@ namespace AsyncInn.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel()
         {
-            return await _context.Hotel.ToListAsync();
+            return Ok(await hotelRepository.GetHotels());
         }
 
         // GET: api/Hotels/5
@@ -56,23 +56,15 @@ namespace AsyncInn.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(hotel).State = EntityState.Modified;
+            bool didUpdate = await hotelRepository.UpdateHotel(id, hotel);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HotelExists(id))
+          
+                if (!didUpdate)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
-            }
+            
+            
 
             return NoContent();
         }
@@ -105,9 +97,6 @@ namespace AsyncInn.Controllers
             return hotel;
         }
 
-        private bool HotelExists(long id)
-        {
-            return _context.Hotel.Any(e => e.ID == id);
-        }
+      
     }
 }

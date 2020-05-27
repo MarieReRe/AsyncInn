@@ -56,11 +56,32 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public Task<bool> UpdateAmenities(int id,Amenities amenities)
+        public async Task<bool> UpdateAmenities(int id,Amenities amenities)
         {
-            throw new NotImplementedException();
+            _context.Entry(amenities).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AmenityExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        public bool AmenityExists(int id)
+        {
+            return _context.Amenities.Any(e => e.ID == id);
         }
 
-       
+
     }
 }

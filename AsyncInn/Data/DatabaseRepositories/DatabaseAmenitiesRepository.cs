@@ -43,7 +43,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID)
+        public Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID)
         {
             throw new NotImplementedException();
         }

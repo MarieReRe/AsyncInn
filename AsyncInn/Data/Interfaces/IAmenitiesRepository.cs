@@ -20,7 +20,7 @@ namespace AsyncInn.Data.Interfaces
 
         //D: Delete
         Task<Amenities> DeleteAmenities(int id);
-        Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID);
+        Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID);
 
     }
 }

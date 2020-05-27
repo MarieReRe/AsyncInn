@@ -71,28 +71,22 @@ namespace AsyncInn.Controllers
             _context.Amenities.Add(amenities);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAmenities", new { id = amenities.ID }, amenities);
+            return CreatedAtAction("GetAmenities", new { id = amenities.Id }, amenities);
         }
 
         // DELETE: api/Amenities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Amenities>> DeleteAmenities(int amenitiesId)
+        public async Task<ActionResult<Amenities>> DeleteAmenities(int id)
         {
-            var amenities = await _context.Amenities.FindAsync(id);
+            var amenities = await amenitiesRepository.DeleteAmenities(id);
             if (amenities == null)
             {
                 return NotFound();
             }
 
-            _context.Amenities.Remove(amenities);
-            await _context.SaveChangesAsync();
-
             return amenities;
         }
 
-        private bool AmenitiesExists(int id)
-        {
-            return _context.Amenities.Any(e => e.ID == amenitiesId);
-        }
+        
     }
 }

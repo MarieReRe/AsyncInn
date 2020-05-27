@@ -19,6 +19,7 @@ namespace AsyncInn.Data.Interfaces
 
         //U: Update
         Task<bool> UpdateHotel(long id, Hotel hotel);
+        Task<Hotel> SaveNewHotel(Hotel hotel);
 
         //D: Delete
         Task DeleteHotel(int id);

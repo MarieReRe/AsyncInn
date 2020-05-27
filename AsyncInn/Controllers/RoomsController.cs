@@ -80,15 +80,12 @@ namespace AsyncInn.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Room>> DeleteRoom(long id)
         {
-            var room = await _context.Room.FindAsync(id);
+            var room = await roomRepository.DeleteRoom(id);
+
             if (room == null)
             {
                 return NotFound();
             }
-
-            _context.Room.Remove(room);
-            await _context.SaveChangesAsync();
-
             return room;
         }
 

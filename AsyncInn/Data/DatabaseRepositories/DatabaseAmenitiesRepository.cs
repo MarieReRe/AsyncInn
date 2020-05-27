@@ -56,7 +56,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return amenities;
         }
 
-        public Task<Amenities> UpdateAmenities(int id,Amenities amenities)
+        public Task<bool> UpdateAmenities(int id,Amenities amenities)
         {
             throw new NotImplementedException();
         }

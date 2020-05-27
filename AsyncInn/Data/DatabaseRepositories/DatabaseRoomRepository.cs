@@ -38,7 +38,7 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public async Task<Room> GetRoomById(long id)
         {
-            throw new NotImplementedException();
+            return await _context.Room.FindAsync();
         }
 
         public async Task<List<Room>> GetRooms()
@@ -46,7 +46,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public async Task UpdateRoom(Room room)
+        public async Task<Room> UpdateRoom(Room room)
         {
             throw new NotImplementedException();
         }

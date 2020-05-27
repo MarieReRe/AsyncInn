@@ -37,17 +37,17 @@ namespace AsyncInn.Data.DatabaseRepositories
 
 
         }
+        public Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<Amenities> GetAmenitiesById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<RoomAmenities>> GetAllRoomAmenities(int amenitiesID)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public Task<Amenities> SaveNewAmenity(Amenities amenities)
         {
             throw new NotImplementedException();

@@ -72,6 +72,11 @@ namespace AsyncInn.Data.DatabaseRepositories
             }
         }
 
+        Task IHotelRepository.DeleteHotel(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool HotelExists(long id)
         {
             return _context.Hotel.Any(e => e.ID == id);

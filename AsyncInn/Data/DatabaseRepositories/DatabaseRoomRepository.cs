@@ -9,6 +9,14 @@ namespace AsyncInn.Data.DatabaseRepositories
 {
     public class DatabaseRoomRepository : IRoomRepository
     {
+
+        private readonly AsyncInnDbContext _context;
+
+        public DatabaseRoomRepository(AsyncInnDbContext context)
+        {
+            _context = context;
+        } 
+
         public Task CreateRoom(Room room)
         {
             throw new NotImplementedException();

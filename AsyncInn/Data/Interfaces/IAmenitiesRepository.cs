@@ -9,7 +9,7 @@ namespace AsyncInn.Data.Interfaces
    public interface IAmenitiesRepository
     {
         //C: Create
-        Task CreateAmenities(Amenities amenities);
+        Task<Amenities> CreateAmenities(Amenities amenities);
 
         //R: Read
         Task<Amenities> GetAmenitiesById(int id);

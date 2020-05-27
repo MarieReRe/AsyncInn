@@ -16,9 +16,11 @@ namespace AsyncInn.Data.DatabaseRepositories
         {
             _context = context;
         }
-        public Task CreateAmenities(Amenities amenities)
+        public async Task<Amenities> CreateAmenities(Amenities amenities)
         {
-            throw new NotImplementedException();
+            _context.Amenities.Add(amenities);
+            await _context.SaveChangesAsync();
+            return amenities;
         }
 
         public Task DeleteAmenities(int id)

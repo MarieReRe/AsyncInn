@@ -9,6 +9,13 @@ namespace AsyncInn.Data.DatabaseRepositories
 {
     public class DatabaseAmenitiesRepository : IAmenitiesRepository
     {
+
+        private readonly AsyncInnDbContext _context;
+
+        public DatabaseAmenitiesRepository(AsyncInnDbContext context)
+        {
+            _context = context;
+        }
         public Task CreateAmenities(Amenities amenities)
         {
             throw new NotImplementedException();
@@ -25,6 +32,11 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
 
         public Task<IEnumerable<RoomAmenities>> GetRoomForRoomAmenities(int amenitiesID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Amenities> SaveNewAmenity(Amenities amenities)
         {
             throw new NotImplementedException();
         }

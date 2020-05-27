@@ -24,6 +24,13 @@ namespace AsyncInn.Models
 
         [Required]
         public BedStyle BedStyle { get; set; }
+
+
+
+
+        //Navigation Properties
+        public ICollection<HotelRoom> HotelRoom { get; set; }
+        public ICollection<RoomAmenities> RoomAmenities { get; set; }
     }
     //Flags enum
     public enum Style
@@ -42,4 +49,6 @@ namespace AsyncInn.Models
         Twin,
 
     }
+
+   
 }

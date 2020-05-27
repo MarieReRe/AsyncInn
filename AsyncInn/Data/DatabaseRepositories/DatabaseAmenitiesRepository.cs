@@ -49,9 +49,11 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
 
         
-        public Task<Amenities> SaveNewAmenity(Amenities amenities)
+        public async Task<Amenities> SaveNewAmenity(Amenities amenities)
         {
-            throw new NotImplementedException();
+            _context.Amenities.Add(amenities);
+            await _context.SaveChangesAsync();
+            return amenities;
         }
 
         public Task<Amenities> UpdateAmenities(Amenities amenities)

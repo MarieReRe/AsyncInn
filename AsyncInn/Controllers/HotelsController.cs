@@ -74,9 +74,7 @@ namespace AsyncInn.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-            _context.Hotel.Add(hotel);
-            await _context.SaveChangesAsync();
-
+            await hotelRepository.SaveNewHotel(hotel);
             return CreatedAtAction("GetHotel", new { id = hotel.ID }, hotel);
         }
 

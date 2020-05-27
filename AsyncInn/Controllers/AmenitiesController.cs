@@ -31,9 +31,9 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenities>> GetAmenities(int amenitiesId)
+        public async Task<ActionResult<Amenities>> GetAmenities(int id)
         {
-            Amenities amenities = await amenitiesRepository.GetAmenitiesById(amenitiesId);
+            Amenities amenities = await amenitiesRepository.GetAmenitiesById(id);
 
             if (amenities == null)
             {
@@ -47,29 +47,18 @@ namespace AsyncInn.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAmenities(int id, Amenities amenities)
         {
-            if (id != amenities.ID)
+            amenities.Id = id;
+            if (id != amenities.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(amenities).State = EntityState.Modified;
+            bool amenityUpdated = await amenitiesRepository.UpdateAmenities(id, amenities);
 
-            try
+            if (!amenityUpdated)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AmenitiesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
             return NoContent();
         }
 
@@ -87,7 +76,7 @@ namespace AsyncInn.Controllers
 
         // DELETE: api/Amenities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Amenities>> DeleteAmenities(int id)
+        public async Task<ActionResult<Amenities>> DeleteAmenities(int amenitiesId)
         {
             var amenities = await _context.Amenities.FindAsync(id);
             if (amenities == null)
@@ -103,7 +92,7 @@ namespace AsyncInn.Controllers
 
         private bool AmenitiesExists(int id)
         {
-            return _context.Amenities.Any(e => e.ID == id);
+            return _context.Amenities.Any(e => e.ID == amenitiesId);
         }
     }
 }

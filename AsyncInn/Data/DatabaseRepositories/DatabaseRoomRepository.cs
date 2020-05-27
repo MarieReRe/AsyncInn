@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public async Task<List<Room>> GetRooms()
         {
-            throw new NotImplementedException();
+            return await _context.Room.ToListAsync();
         }
 
         public async Task<Room> UpdateRoom(Room room)

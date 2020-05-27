@@ -16,6 +16,7 @@ namespace AsyncInn.Data.Interfaces
 
         //U: Update
         Task<Amenities> UpdateAmenities(Amenities amenities);
+        Task<Amenities> SaveNewAmenity(Amenities amenities);
 
         //D: Delete
         Task DeleteAmenities(int id);

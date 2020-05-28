@@ -8,7 +8,7 @@ namespace AsyncInn.Models
 {
     public class Room
     {
-        public long ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -30,7 +30,7 @@ namespace AsyncInn.Models
 
         //Navigation Properties
         public ICollection<HotelRoom> HotelRoom { get; set; }
-        public ICollection<RoomAmenities> RoomAmenities { get; set; }
+        public ICollection<Amenities> Amenities { get; set; }
     }
     //Flags enum
     public enum Style

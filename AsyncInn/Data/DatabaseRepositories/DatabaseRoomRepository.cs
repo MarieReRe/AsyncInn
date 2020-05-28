@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,9 +38,27 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<Room> GetRoomById(long id)
+        public async Task<RoomDTO> GetRoomById(int id)
         {
-            return await _context.Room.FindAsync();
+            // return await _context.Room.FindAsync();
+            var room = await _context.Room
+                 .Select(room => new RoomDTO
+                 {
+                     Id = room.ID,
+                     Name = room.Name,
+                     Style = room.Style.ToString(),
+
+                     Amenities = room.Amenities
+                     .Select(amenity => new AmenityDTO
+                     {
+                         Id = amenity.Id,
+                         Name = amenity.Name,
+                     })
+                     .ToList()
+
+                 })
+                 .FirstOrDefaultAsync(room => room.Id == id);
+            return room;
         }
 
         public async Task<List<Room>> GetRooms()

@@ -26,7 +26,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<Room> DeleteRoom(int id)
+        public async Task<Room> DeleteRoom(long id)
         {
             var room = await _context.Room.FindAsync(id);
             if(room == null)
@@ -60,7 +60,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<IEnumerable<RoomDTO>> GetRooms()
+        public async Task<List<RoomDTO>> GetRooms()
         {
             //return await _context.Room.ToListAsync();
             var rooms = await _context.Room

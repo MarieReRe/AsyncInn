@@ -19,10 +19,10 @@ namespace AsyncInn.Data.Interfaces
         //U: Update
         Task<bool> UpdateRoom(long id, Room room);
 
-        Task<RoomDTO> SaveNewRoom(Room room);
+        Task<Room> SaveNewRoom(Room room);
 
         //D: Delete
-        Task<RoomDTO> DeleteRoom(long id);
+        Task<Room> DeleteRoom(long id);
     
     }
 }

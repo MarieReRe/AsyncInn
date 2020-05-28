@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using AsyncInn.Models.ApiRecievals;
+using AsyncInn.Data.Interfaces;
 
 namespace AsyncInn.Controllers
 {
@@ -14,12 +16,10 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class HotelRoomsController : ControllerBase
     {
-        private readonly AsyncInnDbContext _context;
-        
-
-        public HotelRoomsController(AsyncInnDbContext context)
+        IHotelRoomRepository hotelRoomRepository;
+       public HotelRoomsController(IHotelRoomRepository hotelRoomRepository)
         {
-            _context = context;
+            this.hotelRoomRepository = hotelRoomRepository;
         }
 
         // GET: api/HotelRooms
@@ -79,9 +79,9 @@ namespace AsyncInn.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(HotelRoom hotelRoom)
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom roomNumber)
         {
-            _context.HotelRoom.Add(hotelRoom);
+           var savedHotelRoom = await 
             try
             {
                 await _context.SaveChangesAsync();

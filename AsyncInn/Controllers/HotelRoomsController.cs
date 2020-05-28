@@ -9,6 +9,7 @@ using AsyncInn.Data;
 using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Controllers
 {
@@ -24,9 +25,9 @@ namespace AsyncInn.Controllers
 
         // GET: api/HotelRooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms()
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms()
         {
-            return await _context.HotelRoom.ToListAsync();
+            return Ok (await hotelRoomRepository.GetHotelRooms());
         }
 
         // GET: api/HotelRooms/5
@@ -34,7 +35,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
         {
             //change this to rely on hotel room repository
-            var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
+            var hotelRoom = await hotelRoomRepository.GetHotelRoomById(hotelId);
 
             if (hotelRoom == null)
             {

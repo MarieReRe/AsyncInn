@@ -15,6 +15,7 @@ namespace AsyncInn.Controllers
     public class HotelRoomsController : ControllerBase
     {
         private readonly AsyncInnDbContext _context;
+        
 
         public HotelRoomsController(AsyncInnDbContext context)
         {
@@ -23,7 +24,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/HotelRooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRoom()
+        public async Task<ActionResult<IEnumerable<HotelRoom>>> GetHotelRooms()
         {
             return await _context.HotelRoom.ToListAsync();
         }

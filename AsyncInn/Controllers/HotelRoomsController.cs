@@ -34,7 +34,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
         {
             //change this to rely on hotel room repository
-            var hotelRoom = await _context.HotelRoom.FindAsync(id);
+            var hotelRoom = await _context.HotelRoom.FindAsync(roomNumber, hotelId);
 
             if (hotelRoom == null)
             {

@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,17 @@ namespace AsyncInn.Data.Interfaces
     public interface IHotelRoomRepository
     {
         // Create: POST
-        Task<HotelRoom> CreateHotelRoom();
+        Task<HotelRoom> CreateHotelRoom(CreateHotelRoom hotelRoomData);
         //READ: GET
         Task<HotelRoom> GetHotelRoomById(long hotelId);
         Task<IEnumerable<HotelRoomDTO>> GetHotelRooms();
 
 
         //UPDATE: PUT
-        Task<bool> UpdateHotelRooms();
+        Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData);
+        Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData);
 
         //DELETE: DELETE
-        Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId);
+        Task<HotelRoom> RemoveHotelRoom(long hotelId);
     }
 }

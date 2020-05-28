@@ -89,6 +89,12 @@ namespace AsyncInn.Controllers
             return room;
         }
 
+        //AMENITIES GO HERE 
+        /*
+         * create
+           delete
+         */
+
        
     }
 }

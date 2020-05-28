@@ -10,7 +10,7 @@ using AsyncInn.Models;
 
 namespace AsyncInn.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Hotels/{HotelId}/Rooms")]
     [ApiController]
     public class HotelRoomsController : ControllerBase
     {
@@ -29,9 +29,10 @@ namespace AsyncInn.Controllers
         }
 
         // GET: api/HotelRooms/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(long id)
+        [HttpGet("{RoomNumber}")]
+        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
         {
+            //change this to rely on hotel room repository
             var hotelRoom = await _context.HotelRoom.FindAsync(id);
 
             if (hotelRoom == null)
@@ -43,8 +44,7 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/HotelRooms/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+  
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotelRoom(long id, HotelRoom hotelRoom)
         {

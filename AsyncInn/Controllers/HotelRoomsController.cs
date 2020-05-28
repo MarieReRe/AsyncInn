@@ -30,7 +30,7 @@ namespace AsyncInn.Controllers
             return Ok (await hotelRoomRepository.GetHotelRooms());
         }
 
-        // GET: api/HotelRooms/5
+        // GET: api/HotelRooms/5 <---- in post method for routing
         [HttpGet("{RoomNumber}")]
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
         {
@@ -48,7 +48,7 @@ namespace AsyncInn.Controllers
         // PUT: api/HotelRooms/5
   
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotelRoom(long id, Room room)
+        public async Task<IActionResult> PutHotelRoom(long id, CreateHotelRoom hotelRoomData)
         {
             if (id != room.Id)
             {
@@ -69,26 +69,12 @@ namespace AsyncInn.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom roomNumber)
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom hotelRoomData)
         {
-           var savedHotelRoom = await 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (HotelRoomExists(hotelRoom.HotelId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetHotelRoom", new { id = hotelRoom.HotelId }, hotelRoom);
+            var hotelRoom = await hotelRoomRepository.SaveNewHotelRoom(hotelRoomData);
+           
+            // params to get the routes <---remind for tomorrow
+            return CreatedAtAction("GetHotelRoom", new { hotelRoom.HotelId, hotelRoom.RoomNumber}, hotelRoom);
         }
 
         // DELETE: api/HotelRooms/5

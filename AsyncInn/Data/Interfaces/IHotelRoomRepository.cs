@@ -11,7 +11,7 @@ namespace AsyncInn.Data.Interfaces
     public interface IHotelRoomRepository
     {
         // Create: POST
-        Task<HotelRoom> CreateHotelRoom(CreateHotelRoom roomNumber);
+        Task<HotelRoom> CreateHotelRoom(CreateHotelRoom hotelRoomData);
         //READ: GET
         Task<HotelRoom> GetHotelRoomById(long hotelId);
         Task<IEnumerable<HotelRoomDTO>> GetHotelRooms();

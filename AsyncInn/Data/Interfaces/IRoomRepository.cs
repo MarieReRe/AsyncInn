@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,16 @@ namespace AsyncInn.Data.Interfaces
         Task<Room> CreateRoom(Room room);
 
         //R: Read
-        Task<Room> GetRoomById(long id);
-        Task<List<Room>> GetRooms();
+        Task<RoomDTO> GetRoomById(long id);
+        Task<List<RoomDTO>> GetRooms();
 
         //U: Update
         Task<bool> UpdateRoom(long id, Room room);
 
-        Task<Room> SaveNewRoom(Room room);
+        Task<RoomDTO> SaveNewRoom(Room room);
 
         //D: Delete
-        Task<Room> DeleteRoom(long id);
+        Task<RoomDTO> DeleteRoom(long id);
     
     }
 }

@@ -26,7 +26,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<Room> DeleteRoom(long id)
+        public async Task<Room> DeleteRoom(int id)
         {
             var room = await _context.Room.FindAsync(id);
             if(room == null)
@@ -38,12 +38,12 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<RoomDTO> GetRoomById(int id)
+        public async Task<RoomDTO> GetRoomById(long id)
         {
             var room = await _context.Room
                  .Select(room => new RoomDTO
                  {
-                     Id = room.ID,
+                     Id = room.Id,
                      Name = room.Name,
                      Style = room.Style.ToString(),
 
@@ -66,7 +66,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             var rooms = await _context.Room
                 .Select(room => new RoomDTO
                 {
-                    Id = room.ID,
+                    Id = room.Id,
                     Name = room.Name,
                     Style = room.Style.ToString(),
 
@@ -109,7 +109,7 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public bool RoomExists(long id)
         {
-            return _context.Room.Any(e => e.ID == id);
+            return _context.Room.Any(e => e.Id == id);
         }
         public async Task<Room> SaveNewRoom(Room room)
         {

@@ -48,31 +48,20 @@ namespace AsyncInn.Controllers
         // PUT: api/HotelRooms/5
   
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotelRoom(long id, HotelRoom hotelRoom)
+        public async Task<IActionResult> PutHotelRoom(long id, Room room)
         {
-            if (id != hotelRoom.HotelId)
+            if (id != room.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(hotelRoom).State = EntityState.Modified;
+           bool updateComplete = await hotelRoomRepository.UpdateHotelRooms(id, room);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
                 if (!HotelRoomExists(id))
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
-            }
-
+                
             return NoContent();
         }
 

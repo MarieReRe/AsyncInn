@@ -40,7 +40,6 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public async Task<RoomDTO> GetRoomById(int id)
         {
-            // return await _context.Room.FindAsync();
             var room = await _context.Room
                  .Select(room => new RoomDTO
                  {
@@ -61,9 +60,29 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<List<Room>> GetRooms()
+        public async Task<IEnumerable<RoomDTO>> GetRooms()
         {
-            return await _context.Room.ToListAsync();
+            //return await _context.Room.ToListAsync();
+            var rooms = await _context.Room
+                .Select(room => new RoomDTO
+                {
+                    Id = room.ID,
+                    Name = room.Name,
+                    Style = room.Style.ToString(),
+
+                    Amenities = room.Amenities
+                     .Select(amenity => new AmenityDTO
+                     {
+                         Id = amenity.Id,
+                         Name = amenity.Name,
+                     })
+                     .ToList()
+
+                })
+                .ToListAsync();
+
+
+        return rooms;
         }
 
         public async Task<bool> UpdateRoom(long id, Room room)

@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,13 +40,13 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         }
       
-        public async Task<Amenities> GetAmenitiesById(int amenitiesId)
+        public async Task<AmenityDTO> GetAmenitiesById(int amenitiesId)
         {
             return await _context.Amenities.FindAsync(amenitiesId);
         }
 
         
-        public async Task<Amenities> SaveNewAmenity(Amenities amenities)
+        public async Task<AmenityDTO> SaveNewAmenity(Amenities amenities)
         {
             _context.Amenities.Add(amenities);
             await _context.SaveChangesAsync();
@@ -78,7 +79,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return _context.Amenities.Any(e => e.Id == amenitiesId);
         }
 
-        public async Task<IEnumerable<Amenities>> GetAllRoomAmenities()
+        public async Task<IEnumerable<AmenityDTO>> GetAllRoomAmenities()
         {
             return await _context.Amenities.ToListAsync();
         }

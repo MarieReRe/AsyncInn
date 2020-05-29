@@ -45,18 +45,21 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
 
      
-        public async Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
+        public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
+        public  Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
         {
-            var hotelRooms = await _context.HotelRoom
-                .Select(hotelRooms => new HotelRoomDTO
-                {
 
-                })
+            throw new NotImplementedException();
+
+            //var hotelRooms = await _context.HotelRoom
+            //   .Select(hotelRooms => new HotelRoomDTO
+            //   {
+
+            //   })
         }
 
         public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)

@@ -1,4 +1,6 @@
-﻿namespace AsyncInn.Web.Models
+﻿using System.Collections.Generic;
+
+namespace AsyncInn.Web.Models
 {
     public class RoomSummary
     {

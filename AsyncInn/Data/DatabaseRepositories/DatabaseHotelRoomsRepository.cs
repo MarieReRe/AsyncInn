@@ -72,39 +72,39 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public async Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
+        public Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
         {
             throw new NotImplementedException();
         }
 
-      
 
-        public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
+        public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            var hotelRoom = new HotelRoom
-            {
-                RoomNumber = hotelRoomData.RoomNumber,
-                Rate = hotelRoomData.Rate,
-                RoomId = hotelRoomData.RoomId,
-            };
+            throw new NotImplementedException();
+            /* var hotelRoom = new HotelRoom
+             {
+                 RoomNumber = hotelRoomData.RoomNumber,
+                 Rate = hotelRoomData.Rate,
+                 RoomId = hotelRoomData.RoomId,
+             };
 
-            _context.Entry(hotelRoom).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoomExists(id))
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+             _context.Entry(hotelRoom).State = EntityState.Modified;
+             try
+             {
+                 await _context.SaveChangesAsync();
+                 return true;
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!RoomExists(id))
+                 {
+                     return false;
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }*/
         }
     }
 }

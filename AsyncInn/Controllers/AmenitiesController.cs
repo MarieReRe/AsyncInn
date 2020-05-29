@@ -20,7 +20,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenities>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             return Ok(await amenitiesRepository.GetAllRoomAmenities());
         }

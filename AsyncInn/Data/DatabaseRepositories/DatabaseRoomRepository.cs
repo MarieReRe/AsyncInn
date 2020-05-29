@@ -117,5 +117,10 @@ namespace AsyncInn.Data.DatabaseRepositories
             await _context.SaveChangesAsync();
             return room;
         }
+
+        public Task AddAmenityToRoom(int amenityId, long roomId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

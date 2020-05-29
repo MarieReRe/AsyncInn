@@ -92,6 +92,14 @@ namespace AsyncInn.Controllers
          * create
            delete
          */
+        //POST: api/Rooms/5/Amenities/17
+
+        [HttpPost("{roomId}/Amenities/{amenityId}")]
+        public async Task<ActionResult> AddRoomAmenity(long roomId, int amenityId)
+        {
+            await roomRepository.AddAmenityToRoom(amenityId, roomId);
+            return NoContent();
+        }
 
        
     }

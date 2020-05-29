@@ -23,6 +23,6 @@ namespace AsyncInn.Data.Interfaces
 
         //D: Delete
         Task<Room> DeleteRoom(long id);
-    
+        Task AddAmenityToRoom(int amenityId, long roomId);
     }
 }

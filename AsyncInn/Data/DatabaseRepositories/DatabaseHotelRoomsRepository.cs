@@ -21,7 +21,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<HotelRoom> GetHotelRoomById(long hotelId)
+        public Task<HotelRoom> GetHotelRoomById(int roomNumber, long hotelId)
         {
             throw new NotImplementedException();
         }

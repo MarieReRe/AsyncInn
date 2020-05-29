@@ -39,7 +39,7 @@ namespace AsyncInn.Data
             modelBuilder.Entity<Room>()
                 .HasData(new Room
                 {
-                    ID = 1, 
+                    Id = 1, 
                     Name = "Charming Room",
                     Style = Style.CoastalView,
                     MaxGuests = 2,
@@ -52,7 +52,7 @@ namespace AsyncInn.Data
                 },
                 new Room
                 {
-                    ID = 2,
+                    Id = 2,
                     Name = "Superior Room - Pool Floor",
                     Style = Style.PoolView,
                     MaxGuests = 2,
@@ -61,7 +61,7 @@ namespace AsyncInn.Data
                 },
                 new Room
                 {
-                    ID = 3,
+                    Id = 3,
                     Name = "Superior Room - Top Floor",
                     Style = Style.Penthouse,
                     MaxGuests = 2,

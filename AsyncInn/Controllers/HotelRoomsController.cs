@@ -18,7 +18,7 @@ namespace AsyncInn.Controllers
     public class HotelRoomsController : ControllerBase
     {
         IHotelRoomRepository hotelRoomRepository;
-       public HotelRoomsController(IHotelRoomRepository hotelRoomRepository)
+        public HotelRoomsController(IHotelRoomRepository hotelRoomRepository)
         {
             this.hotelRoomRepository = hotelRoomRepository;
         }
@@ -27,7 +27,7 @@ namespace AsyncInn.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms()
         {
-            return Ok (await hotelRoomRepository.GetHotelRooms());
+            return Ok(await hotelRoomRepository.GetHotelRooms());
         }
 
         // GET: api/HotelRooms/5 <---- in post method for routing
@@ -35,7 +35,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
         {
             //change this to rely on hotel room repository
-            var hotelRoom = await hotelRoomRepository.GetHotelRoomById(hotelId);
+            var hotelRoom = await hotelRoomRepository.GetHotelRoomById(roomNumber, hotelId);
 
             if (hotelRoom == null)
             {
@@ -46,56 +46,48 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/HotelRooms/5
-  
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotelRoom(long id, CreateHotelRoom hotelRoomData)
+
+        [HttpPut("{RoomNumber}")]
+        public async Task<IActionResult> PutHotelRoom(int roomNumber, CreateHotelRoom hotelRoomData)
         {
-            if (id != room.Id)
+            if (roomNumber != hotelRoomData.RoomNumber)
             {
                 return BadRequest();
             }
 
-           bool updateComplete = await hotelRoomRepository.UpdateHotelRooms(id, room);
+            bool updateComplete = await hotelRoomRepository.UpdateHotelRooms(roomNumber, hotelRoomData);
 
-                if (!HotelRoomExists(id))
-                {
-                    return NotFound();
-                }
-                
+            if (!updateComplete)
+            {
+                return NotFound();
+            }
+
             return NoContent();
         }
 
         // POST: api/HotelRooms
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+      
         [HttpPost]
         public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom hotelRoomData)
         {
             var hotelRoom = await hotelRoomRepository.SaveNewHotelRoom(hotelRoomData);
-           
+
             // params to get the routes <---remind for tomorrow
-            return CreatedAtAction("GetHotelRoom", new { hotelRoom.HotelId, hotelRoom.RoomNumber}, hotelRoom);
+            return CreatedAtAction("GetHotelRoom", new { hotelRoom.HotelId, hotelRoom.RoomNumber }, hotelRoom);
         }
 
         // DELETE: api/HotelRooms/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(long id)
+        [HttpDelete("{RoomNumber}")]
+        public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(int roomNumber, long hotelId)
         {
-            var hotelRoom = await _context.HotelRoom.FindAsync(id);
+            var hotelRoom = await hotelRoomRepository.RemoveHotelRoom(roomNumber, hotelId);
             if (hotelRoom == null)
             {
                 return NotFound();
             }
 
-            _context.HotelRoom.Remove(hotelRoom);
-            await _context.SaveChangesAsync();
-
             return hotelRoom;
         }
 
-        private bool HotelRoomExists(long id)
-        {
-            return _context.HotelRoom.Any(e => e.HotelId == id);
-        }
     }
 }

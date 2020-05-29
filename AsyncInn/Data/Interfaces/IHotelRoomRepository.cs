@@ -13,7 +13,7 @@ namespace AsyncInn.Data.Interfaces
         // Create: POST
         Task<HotelRoom> CreateHotelRoom(CreateHotelRoom hotelRoomData);
         //READ: GET
-        Task<HotelRoom> GetHotelRoomById(long hotelId);
+        Task<HotelRoom> GetHotelRoomById(int roomNumber, long hotelId);
         Task<IEnumerable<HotelRoomDTO>> GetHotelRooms();
 
 
@@ -22,6 +22,6 @@ namespace AsyncInn.Data.Interfaces
         Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData);
 
         //DELETE: DELETE
-        Task<HotelRoom> RemoveHotelRoom(long hotelId);
+        Task<HotelRoom> RemoveHotelRoom(int roomNumber, long hotelId);
     }
 }

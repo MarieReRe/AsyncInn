@@ -118,9 +118,15 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public Task AddAmenityToRoom(int amenityId, long roomId)
+        public async Task AddAmenityToRoom(int amenityId, long roomId)
         {
-            throw new NotImplementedException();
+            var roomAmenity = new RoomAmenities
+            {
+                AmenitiesId = amenityId,
+                RoomId = roomId,
+            };
+            _context.RoomAmenities.Add(roomAmenity);
+            await _context.SaveChangesAsync();
         }
     }
 }

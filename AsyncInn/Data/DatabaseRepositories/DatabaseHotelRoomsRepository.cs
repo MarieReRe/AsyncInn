@@ -3,6 +3,7 @@ using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,14 +45,18 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
 
      
-        public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
+        public async Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
+        public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
         {
-            throw new NotImplementedException();
+            var hotelRooms = await _context.HotelRoom
+                .Select(hotelRooms => new HotelRoomDTO
+                {
+
+                })
         }
 
         public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)
@@ -64,16 +69,39 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
+        public async Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
         {
             throw new NotImplementedException();
         }
 
       
 
-        public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
+        public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            throw new NotImplementedException();
+            var hotelRoom = new HotelRoom
+            {
+                RoomNumber = hotelRoomData.RoomNumber,
+                Rate = hotelRoomData.Rate,
+                RoomId = hotelRoomData.RoomId,
+            };
+
+            _context.Entry(hotelRoom).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RoomExists(id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
 }

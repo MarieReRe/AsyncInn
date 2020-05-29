@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncInn.Controllers
 {
@@ -19,16 +20,16 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenities>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
             return Ok(await amenitiesRepository.GetAllRoomAmenities());
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenities>> GetAmenities(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenities(int id)
         {
-            Amenities amenities = await amenitiesRepository.GetAmenitiesById(id);
+            var amenities = await amenitiesRepository.GetAmenitiesById(id);
 
             if (amenities == null)
             {
@@ -81,6 +82,6 @@ namespace AsyncInn.Controllers
             return amenities;
         }
 
-        
+
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Controllers
 {
@@ -25,14 +26,14 @@ namespace AsyncInn.Controllers
 
         // GET: api/Hotels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
+        public async Task<ActionResult<IEnumerable<HotelDTO>>> GetHotels()
         {
             return Ok(await hotelRepository.GetHotels());
         }
 
         // GET: api/Hotels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> GetHotel(long id)
+        public async Task<ActionResult<HotelDTO>> GetHotel(long id)
         {
             var hotel = await hotelRepository.GetHotelById(id);
 
@@ -49,8 +50,8 @@ namespace AsyncInn.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel(long id, Hotel hotel)
         {
-            hotel.ID = id;
-            if (id != hotel.ID)
+            hotel.Id = id;
+            if (id != hotel.Id)
             {
                 return BadRequest();
             }
@@ -75,7 +76,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
             await hotelRepository.SaveNewHotel(hotel);
-            return CreatedAtAction("GetHotel", new { id = hotel.ID }, hotel);
+            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }
 
         // DELETE: api/Hotels/5

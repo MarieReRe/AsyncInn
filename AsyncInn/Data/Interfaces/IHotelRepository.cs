@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace AsyncInn.Data.Interfaces
         Task<Hotel> CreateHotel(Hotel hotel);
 
         //R: Read
-        Task<Hotel> GetHotelById(long id);
-        Task<IEnumerable<Hotel>> GetHotels();
+        Task<HotelDTO> GetHotelById(long id);
+        Task<IEnumerable<HotelDTO>> GetHotels();
 
         //U: Update
         Task<bool> UpdateHotel(long id, Hotel hotel);

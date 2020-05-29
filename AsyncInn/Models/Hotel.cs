@@ -8,7 +8,7 @@ namespace AsyncInn.Models
 {
     public class Hotel
     {
-        public long ID { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string HotelName { get; set; }

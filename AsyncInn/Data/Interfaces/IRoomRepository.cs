@@ -1,13 +1,11 @@
-﻿using AsyncInn.Models;
-using AsyncInn.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Data.Interfaces
 {
-   public interface IRoomRepository
+    public interface IRoomRepository
     {
         //C: Create
         Task<Room> CreateRoom(Room room);
@@ -23,6 +21,9 @@ namespace AsyncInn.Data.Interfaces
 
         //D: Delete
         Task<Room> DeleteRoom(long id);
-    
+
+        // RoomAmenities Stuff Goes Here
+        Task AddAmenityToRoom(int amenityId, long roomId);
+        Task RemoveAmenityFromRoom(int amenityId, long roomId);
     }
 }

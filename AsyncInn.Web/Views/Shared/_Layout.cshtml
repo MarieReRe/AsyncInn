@@ -28,9 +28,11 @@
                 </div>
             </div>
         </nav>
+        @RenderSection("Header", required: false)
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <!--where rendering of page-->
             @RenderBody()
         </main>
     </div>

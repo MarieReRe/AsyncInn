@@ -73,7 +73,7 @@ namespace AsyncInn.Controllers
 
         // DELETE: api/HotelRooms/5
         [HttpDelete("{RoomNumber}")]
-        public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(int roomNumber, long hotelId)
+        public async Task<ActionResult<HotelRoomDTO>> DeleteHotelRoom(int roomNumber, long hotelId)
         {
             var hotelRoom = await hotelRoomRepository.RemoveHotelRoom(roomNumber, hotelId);
             if (hotelRoom == null)

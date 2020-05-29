@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
 
@@ -19,6 +18,6 @@ namespace AsyncInn.Data.Interfaces
         Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData);
 
         //DELETE: DELETE
-        Task<HotelRoom> RemoveHotelRoom(int roomNumber, long hotelId);
+        Task<HotelRoomDTO> RemoveHotelRoom(int roomNumber, long hotelId);
     }
 }

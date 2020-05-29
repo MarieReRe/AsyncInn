@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsyncInn.Data.Interfaces;
@@ -94,14 +93,20 @@ namespace AsyncInn.Data.DatabaseRepositories
                 .ToListAsync();
         }
 
-        public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)
+        public async Task<HotelRoomDTO> RemoveHotelRoom(int roomNumber, long hotelId)
         {
-            throw new NotImplementedException();
-        }
+            var hotelRoom = await _context.HotelRoom
+                .FirstOrDefaultAsync(hr => hr.HotelId == hotelId && hr.RoomNumber == roomNumber);
 
-        public Task<HotelRoom> RemoveHotelRoom(long hotelId)
-        {
-            throw new NotImplementedException();
+            if (hotelRoom == null)
+                return null;
+
+            var hotelRoomToReturn = await GetHotelRoomByNumber(roomNumber, hotelId);
+
+            _context.HotelRoom.Remove(hotelRoom);
+            await _context.SaveChangesAsync();
+
+            return hotelRoomToReturn;
         }
 
         public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)

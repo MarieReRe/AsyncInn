@@ -104,33 +104,21 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
+        public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            throw new NotImplementedException();
-            /* var hotelRoom = new HotelRoom
-             {
-                 RoomNumber = hotelRoomData.RoomNumber,
-                 Rate = hotelRoomData.Rate,
-                 RoomId = hotelRoomData.RoomId,
-             };
+            var hotelRoom = await _context.HotelRoom
+                .FirstOrDefaultAsync(hr => hr.HotelId == hotelId && hr.RoomNumber == hotelRoomData.RoomNumber);
 
-             _context.Entry(hotelRoom).State = EntityState.Modified;
-             try
-             {
-                 await _context.SaveChangesAsync();
-                 return true;
-             }
-             catch (DbUpdateConcurrencyException)
-             {
-                 if (!RoomExists(id))
-                 {
-                     return false;
-                 }
-                 else
-                 {
-                     throw;
-                 }
-             }*/
+            if (hotelRoom == null)
+                return false;
+
+            hotelRoom.Rate = hotelRoomData.Rate;
+            hotelRoom.RoomId = hotelRoomData.RoomId;
+
+            _context.Entry(hotelRoom).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -128,5 +128,18 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context.RoomAmenities.Add(roomAmenity);
             await _context.SaveChangesAsync();
         }
+
+        public async Task RemoveAmenityFromRoom(int amenityId, long roomId)
+        {
+            var roomAmenity = await _context.RoomAmenities
+                .Where(ra => ra.AmenitiesId == amenityId)
+                .Where(ra => ra.RoomId == roomId)
+                .FirstOrDefaultAsync();
+            if(roomAmenity != null)
+            {
+                _context.RoomAmenities.Remove(roomAmenity);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

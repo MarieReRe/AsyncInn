@@ -101,6 +101,14 @@ namespace AsyncInn.Controllers
             return NoContent();
         }
 
-       
+        [HttpPost("{roomId}/Amenities/{amenityId}")]
+        public async Task<ActionResult> RemoveRoomAmenity(long roomId, int amenityId)
+        {
+            await roomRepository.RemoveAmenityFromRoom(amenityId, roomId);
+            return NoContent();
+        }
+
+
+
     }
 }

@@ -81,6 +81,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                     .ToList()
                 })
                 .ToListAsync();
+            return hotels;
         }
 
         public async Task<Hotel> SaveNewHotel(Hotel hotel)

@@ -13,9 +13,11 @@ namespace AsyncInn.Models
         
 
         [Required]
+        [Display(Name = "Room Number")]
         public int RoomNumber { get; set; }
 
         [Required]
+        [Display(Name = "Rate")]
         public decimal Rate { get; set; }
 
         //Refrences to other tables

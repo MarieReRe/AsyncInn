@@ -32,7 +32,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/HotelRooms/5 <---- in post method for routing
         [HttpGet("{RoomNumber}")]
-        public async Task<ActionResult<HotelRoom>> GetHotelRoom(int roomNumber, long hotelId)
+        public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int roomNumber, long hotelId)
         {
             //change this to rely on hotel room repository
             var hotelRoom = await hotelRoomRepository.GetHotelRoomById(roomNumber, hotelId);

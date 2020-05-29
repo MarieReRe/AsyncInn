@@ -21,7 +21,7 @@ namespace AsyncInn.Data
             modelBuilder.Entity<Hotel>()
                 .HasData(new Hotel
                 {
-                    ID = 1,
+                    Id = 1,
                     HotelName = "Hotel Vulcano Porto",
                     StreetAddress = "Via Nazionale 3",
                     City = "Salina",

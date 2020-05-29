@@ -30,7 +30,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom(int roomNumber, long hotelId)
         {
             //change this to rely on hotel room repository
-            var hotelRoom = await hotelRoomRepository.GetHotelRoomById(roomNumber, hotelId);
+            var hotelRoom = await hotelRoomRepository.GetHotelRoomByNumber(roomNumber, hotelId);
 
             if (hotelRoom == null)
             {
@@ -43,14 +43,14 @@ namespace AsyncInn.Controllers
         // PUT: api/HotelRooms/5
 
         [HttpPut("{RoomNumber}")]
-        public async Task<IActionResult> PutHotelRoom(int roomNumber, CreateHotelRoom hotelRoomData)
+        public async Task<IActionResult> PutHotelRoom(long hotelId, int roomNumber, CreateHotelRoom hotelRoomData)
         {
             if (roomNumber != hotelRoomData.RoomNumber)
             {
                 return BadRequest();
             }
 
-            bool updateComplete = await hotelRoomRepository.UpdateHotelRooms(roomNumber, hotelRoomData);
+            bool updateComplete = await hotelRoomRepository.UpdateHotelRooms(hotelId, hotelRoomData);
 
             if (!updateComplete)
             {
@@ -63,9 +63,9 @@ namespace AsyncInn.Controllers
         // POST: api/HotelRooms
 
         [HttpPost]
-        public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom hotelRoomData)
+        public async Task<ActionResult<HotelRoom>> PostHotelRoom(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            var hotelRoom = await hotelRoomRepository.SaveNewHotelRoom(hotelRoomData);
+            var hotelRoom = await hotelRoomRepository.CreateHotelRoom(hotelId, hotelRoomData);
 
             // params to get the routes <---remind for tomorrow
             return CreatedAtAction("GetHotelRoom", new { hotelRoom.HotelId, hotelRoom.RoomNumber }, hotelRoom);

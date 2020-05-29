@@ -73,7 +73,6 @@ namespace AsyncInn.Data.DatabaseRepositories
                     HotelRoom = hotel.HotelRoom
                     .Select(hr => new HotelRoomDTO
                     {
-                        Name = hr.Hotel.HotelName,
                         HotelId = hr.HotelId,
                         Rate = hr.Rate,
                         RoomNumber = hr.RoomNumber,

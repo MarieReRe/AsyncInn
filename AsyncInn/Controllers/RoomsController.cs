@@ -11,7 +11,8 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        IRoomRepository roomRepository;
+        private readonly IRoomRepository roomRepository;
+
         public RoomsController(IRoomRepository roomRepository)
         {
             this.roomRepository = roomRepository;

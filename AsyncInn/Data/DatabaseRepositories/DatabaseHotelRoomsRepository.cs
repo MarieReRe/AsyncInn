@@ -19,16 +19,11 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context = context;
         }
 
-        public async Task<HotelRoomDTO> CreateHotelRoom(CreateHotelRoom hotelRoomData)
+        public async Task<HotelRoomDTO> CreateHotelRoom(long hotelId, CreateHotelRoom hotelRoomData)
         {
-
-            var room = await _context.Room.FindAsync(hotelRoomData.RoomId);
-            if (room == null)
-            {
-                return null;
-            }
             var hotelRoom = new HotelRoom
             {
+                HotelId = hotelId,
                 RoomNumber = hotelRoomData.RoomNumber,
                 Rate = hotelRoomData.Rate,
                 RoomId = hotelRoomData.RoomId,
@@ -38,15 +33,38 @@ namespace AsyncInn.Data.DatabaseRepositories
             await _context.SaveChangesAsync();
 
             // return CreatedAtAction("GetHotelRoom", new { id = hotelRoom.Id }, hotelRoom);
-            var newHotelRoom = await GetHotelRoomById(hotelRoom.RoomNumber, hotelRoomData.RoomId);
+            var newHotelRoom = await GetHotelRoomByNumber(hotelRoom.RoomNumber, hotelRoomData.RoomId);
 
             return newHotelRoom;
         }
 
 
-        public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
+        public async Task<HotelRoomDTO> GetHotelRoomByNumber(int roomNumber, long hotelId)
         {
-            throw new NotImplementedException();
+            return await _context.HotelRoom
+                .Where(hr => hr.HotelId == hotelId)
+                .Where(hr => hr.RoomNumber == roomNumber)
+                .Select(hr => new HotelRoomDTO
+                {
+                    HotelId = hr.HotelId,
+                    RoomNumber = hr.RoomNumber,
+                    Rate = hr.Rate,
+                    Room = new RoomDTO
+                    {
+                        Id = hr.Room.Id,
+                        Name = hr.Room.Name,
+                        Style = hr.Room.Style.ToString(),
+
+                        Amenities = hr.Room.Amenities
+                            .Select(ra => new AmenityDTO
+                            {
+                                Id = ra.Amenities.Id,
+                                Name = ra.Amenities.Name,
+                            })
+                            .ToList(),
+                    }
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId)
@@ -57,7 +75,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 {
                     HotelId = hr.HotelId,
                     RoomNumber = hr.RoomNumber,
-                    Name = hr.Room.Name,
+                    Rate = hr.Rate,
                     Room = new RoomDTO
                     {
                         Id = hr.Room.Id,
@@ -85,12 +103,6 @@ namespace AsyncInn.Data.DatabaseRepositories
         {
             throw new NotImplementedException();
         }
-
-        public Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {

@@ -1,13 +1,12 @@
-﻿using AsyncInn.Data.Interfaces;
-using AsyncInn.Models;
-using AsyncInn.Models.ApiRecievals;
-using AsyncInn.Models.DTOs;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AsyncInn.Data.Interfaces;
+using AsyncInn.Models;
+using AsyncInn.Models.ApiRecievals;
+using AsyncInn.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Data.DatabaseRepositories
 {
@@ -24,15 +23,15 @@ namespace AsyncInn.Data.DatabaseRepositories
         {
 
             var room = await _context.Room.FindAsync(hotelRoomData.RoomId);
-            if(room == null)
+            if (room == null)
             {
                 return null;
             }
             var hotelRoom = new HotelRoom
             {
-              RoomNumber = hotelRoomData.RoomNumber,
-              Rate = hotelRoomData.Rate,
-              RoomId = hotelRoomData.RoomId,
+                RoomNumber = hotelRoomData.RoomNumber,
+                Rate = hotelRoomData.Rate,
+                RoomId = hotelRoomData.RoomId,
             };
 
             _context.HotelRoom.Add(hotelRoom);
@@ -44,22 +43,37 @@ namespace AsyncInn.Data.DatabaseRepositories
             return newHotelRoom;
         }
 
-     
+
         public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
         {
             throw new NotImplementedException();
         }
 
-        public  Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
+        public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId)
         {
+            return await _context.HotelRoom
+                .Where(hr => hr.HotelId == hotelId)
+                .Select(hr => new HotelRoomDTO
+                {
+                    HotelId = hr.HotelId,
+                    RoomNumber = hr.RoomNumber,
+                    Name = hr.Room.Name,
+                    Room = new RoomDTO
+                    {
+                        Id = hr.Room.Id,
+                        Name = hr.Room.Name,
+                        Style = hr.Room.Style.ToString(),
 
-            throw new NotImplementedException();
-
-            //var hotelRooms = await _context.HotelRoom
-            //   .Select(hotelRooms => new HotelRoomDTO
-            //   {
-
-            //   })
+                        Amenities = hr.Room.Amenities
+                            .Select(ra => new AmenityDTO
+                            {
+                                Id = ra.Id,
+                                Name = ra.Name,
+                            })
+                            .ToList(),
+                    }
+                })
+                .ToListAsync();
         }
 
         public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)

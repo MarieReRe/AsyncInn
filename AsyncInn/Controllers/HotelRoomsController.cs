@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AsyncInn.Data;
+using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
-using AsyncInn.Data.Interfaces;
 using AsyncInn.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncInn.Controllers
 {
@@ -23,11 +18,11 @@ namespace AsyncInn.Controllers
             this.hotelRoomRepository = hotelRoomRepository;
         }
 
-        // GET: api/HotelRooms
+        // GET: api/Hotels/12/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms()
+        public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms(long hotelId)
         {
-            return Ok(await hotelRoomRepository.GetHotelRooms());
+            return Ok(await hotelRoomRepository.GetHotelRooms(hotelId));
         }
 
         // GET: api/HotelRooms/5 <---- in post method for routing
@@ -66,7 +61,7 @@ namespace AsyncInn.Controllers
         }
 
         // POST: api/HotelRooms
-      
+
         [HttpPost]
         public async Task<ActionResult<HotelRoom>> PostHotelRoom(CreateHotelRoom hotelRoomData)
         {

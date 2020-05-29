@@ -1,10 +1,8 @@
-﻿using AsyncInn.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
@@ -14,7 +12,7 @@ namespace AsyncInn.Data.Interfaces
         Task<HotelRoomDTO> CreateHotelRoom(CreateHotelRoom hotelRoomData);
         //READ: GET
         Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId);
-        Task<IEnumerable<HotelRoomDTO>> GetHotelRooms();
+        Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId);
 
 
         //UPDATE: PUT

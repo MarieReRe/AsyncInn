@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Controllers
 {
@@ -26,9 +27,9 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenities>> GetAmenities(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenities(int id)
         {
-            Amenities amenities = await amenitiesRepository.GetAmenitiesById(id);
+           var amenities = await amenitiesRepository.GetAmenitiesById(id);
 
             if (amenities == null)
             {

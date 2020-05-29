@@ -59,7 +59,8 @@ namespace AsyncInn.Data.DatabaseRepositories
         {
             _context.Amenities.Add(amenities);
             await _context.SaveChangesAsync();
-            return amenities;
+            var newAmenity = GetAmenitiesById(amenities.Id);
+            return await newAmenity;
         }
 
         public async Task<bool> UpdateAmenities(int amenitiesId, Amenities amenities)

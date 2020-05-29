@@ -7,7 +7,7 @@ namespace AsyncInn.Models.DTOs
 {
     public class RoomDTO
     {
-        public int ID { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Style { get; set; }
         public List<AmenityDTO> Amenities { get; set; }

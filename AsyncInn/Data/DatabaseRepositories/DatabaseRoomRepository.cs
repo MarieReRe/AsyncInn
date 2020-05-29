@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,14 +38,51 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
-        public async Task<Room> GetRoomById(long id)
+        public async Task<RoomDTO> GetRoomById(long id)
         {
-            return await _context.Room.FindAsync();
+            var room = await _context.Room
+                 .Select(room => new RoomDTO
+                 {
+                     Id = room.Id,
+                     Name = room.Name,
+                     Style = room.Style.ToString(),
+
+                     Amenities = room.Amenities
+                     .Select(amenity => new AmenityDTO
+                     {
+                         Id = amenity.Id,
+                         Name = amenity.Name,
+                     })
+                     .ToList()
+
+                 })
+                 .FirstOrDefaultAsync(room => room.Id == id);
+            return room;
         }
 
-        public async Task<List<Room>> GetRooms()
+        public async Task<List<RoomDTO>> GetRooms()
         {
-            return await _context.Room.ToListAsync();
+            //return await _context.Room.ToListAsync();
+            var rooms = await _context.Room
+                .Select(room => new RoomDTO
+                {
+                    Id = room.Id,
+                    Name = room.Name,
+                    Style = room.Style.ToString(),
+
+                    Amenities = room.Amenities
+                     .Select(amenity => new AmenityDTO
+                     {
+                         Id = amenity.Id,
+                         Name = amenity.Name,
+                     })
+                     .ToList()
+
+                })
+                .ToListAsync();
+
+
+        return rooms;
         }
 
         public async Task<bool> UpdateRoom(long id, Room room)
@@ -71,7 +109,7 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public bool RoomExists(long id)
         {
-            return _context.Room.Any(e => e.ID == id);
+            return _context.Room.Any(e => e.Id == id);
         }
         public async Task<Room> SaveNewRoom(Room room)
         {

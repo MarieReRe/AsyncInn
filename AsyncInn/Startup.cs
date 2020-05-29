@@ -1,6 +1,7 @@
 using AsyncInn.Data;
 using AsyncInn.Data.DatabaseRepositories;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,12 @@ namespace AsyncInn
             //Dependency Injection:
             // AddTransient: Transient objects are always different; a new instance is provided to every controller and every service.
             services.AddTransient<IHotelRepository, DatabaseHotelRepository>();
+            services.AddTransient<IHotelRoomRepository, DatabaseHotelRoomsRepository>();
             services.AddTransient<IRoomRepository,DatabaseRoomRepository>();
             services.AddTransient<IAmenitiesRepository, DatabaseAmenitiesRepository>();
+          
+
+            //services.AddSingleton<IHotelRoomService,HttpHotelRoomService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

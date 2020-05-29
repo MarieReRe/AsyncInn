@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models.DTOs;
 
 namespace AsyncInn.Controllers
 {
@@ -23,16 +24,16 @@ namespace AsyncInn.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
             return Ok(await roomRepository.GetRooms());
         }
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(long id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(long id)
         {
-            Room room = await roomRepository.GetRoomById(id);
+           RoomDTO room = await roomRepository.GetRoomById(id);
 
             if (room == null)
             {
@@ -43,12 +44,11 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/Rooms/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+ 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(long id, Room room)
         {
-            if (id != room.ID)
+            if (id != room.Id)
             {
                 return BadRequest();
             }
@@ -66,14 +66,12 @@ namespace AsyncInn.Controllers
         }
 
         // POST: api/Rooms
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Room>> PostRoom(Room room)
         {
             await roomRepository.SaveNewRoom(room);
 
-            return CreatedAtAction("GetRoom", new { id = room.ID }, room);
+            return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
 
         // DELETE: api/Rooms/5
@@ -88,6 +86,12 @@ namespace AsyncInn.Controllers
             }
             return room;
         }
+
+        //AMENITIES GO HERE 
+        /*
+         * create
+           delete
+         */
 
        
     }

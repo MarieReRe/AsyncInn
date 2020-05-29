@@ -1,4 +1,5 @@
 ﻿using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,15 +11,15 @@ namespace AsyncInn.Data.Interfaces
         Task<Amenities> CreateAmenities(Amenities amenities);
 
         //R: Read
-        Task<Amenities> GetAmenitiesById(int Id);
+        Task<AmenityDTO> GetAmenitiesById(int Id);
 
         //U: Update
         Task<bool> UpdateAmenities(int Id, Amenities amenities);
-        Task<Amenities> SaveNewAmenity(Amenities amenities);
+        Task<AmenityDTO> SaveNewAmenity(Amenities amenities);
 
         //D: Delete
         Task<Amenities> DeleteAmenities(int Id);
-        Task<IEnumerable<Amenities>> GetAllRoomAmenities();
+        Task<IEnumerable<AmenityDTO>> GetAllRoomAmenities();
 
     }
 }

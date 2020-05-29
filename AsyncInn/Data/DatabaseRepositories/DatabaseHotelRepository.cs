@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
+using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,22 +40,55 @@ namespace AsyncInn.Data.DatabaseRepositories
             return hotel;
 
         }
-
-        public async Task<Hotel> GetHotelById(long id)
+      
+        public async Task<HotelDTO> GetHotelById(long id)
         {
-            return await _context.Hotel.FindAsync(id);
+            var hotel = await _context.Hotel
+                .Select(hotel => new HotelDTO
+                {
+                    Id = hotel.Id,
+                    Name = hotel.HotelName,
+                    City = hotel.City,
+                    State = hotel.State,
+                    Country = hotel.Country,
+
+                })
+                .FirstOrDefaultAsync(hotel => hotel.Id == id);
+
+            return hotel;
+
         }
 
-        public async Task<IEnumerable<Hotel>> GetHotels()
+        public async Task<IEnumerable<HotelDTO>> GetHotels()
         {
-            return await _context.Hotel.ToListAsync();
+            var hotels = await _context.Hotel
+                .Select(hotel => new HotelDTO
+                {
+                    Id = hotel.Id,
+                    Name = hotel.HotelName,
+                    City = hotel.City,
+                    State = hotel.State,
+                    Country = hotel.Country,
+
+                    HotelRoom = hotel.HotelRoom
+                    .Select(hotelRoom => new HotelRoomDTO
+                    {
+                        Name = hotelRoom.Hotel.HotelName,
+                        HotelId = hotelRoom.HotelId,
+                        Rate = hotelRoom.Rate,
+
+                    })
+                    .ToList()
+                })
+                .ToListAsync();
+            return hotels;
         }
 
-        public async Task<Hotel> SaveNewHotel(Hotel hotel)
+        public async Task<HotelDTO> SaveNewHotel(Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
-            return hotel;
+            return await GetHotelById(hotel.Id);
         }
 
         public async Task<bool> UpdateHotel(long id, Hotel hotel)
@@ -78,9 +112,12 @@ namespace AsyncInn.Data.DatabaseRepositories
                 }
             }
         }
+
+        
+
         private bool HotelExists(long id)
         {
-            return _context.Hotel.Any(e => e.ID == id);
+            return _context.Hotel.Any(e => e.Id == id);
         }
     }
 }

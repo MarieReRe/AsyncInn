@@ -37,6 +37,8 @@
     <Compile Remove="Migrations\20200526203032_AddCompositeKey.Designer.cs" />
     <Compile Remove="Migrations\20200527164208_HotelAmen.cs" />
     <Compile Remove="Migrations\20200527164208_HotelAmen.Designer.cs" />
+    <Compile Remove="Migrations\20200529150325_SeedSomeAmenities.cs" />
+    <Compile Remove="Migrations\20200529150325_SeedSomeAmenities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

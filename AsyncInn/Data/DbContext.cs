@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AsyncInn.Models;
+﻿using AsyncInn.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Data
@@ -39,16 +35,12 @@ namespace AsyncInn.Data
             modelBuilder.Entity<Room>()
                 .HasData(new Room
                 {
-                    Id = 1, 
+                    Id = 1,
                     Name = "Charming Room",
                     Style = Style.CoastalView,
                     MaxGuests = 2,
                     BedCount = 1,
                     BedStyle = BedStyle.QueenSize,
-
-
-                 
-                    
                 },
                 new Room
                 {
@@ -76,10 +68,35 @@ namespace AsyncInn.Data
                     roomAmenities.AmenitiesId,
                     roomAmenities.RoomId
 
-                }) ;
+                });
 
+            modelBuilder.Entity<Amenities>()
+                .HasData(
+                    new Amenities { Id = 1, Name = "Fridge" },
+                    new Amenities { Id = 2, Name = "Coffee Pot" },
+                    new Amenities { Id = 3, Name = "Hot Tub" }
+                );
 
-        }  
+            modelBuilder.Entity<RoomAmenities>()
+                .HasData(
+                    new RoomAmenities { RoomId = 1, AmenitiesId = 1, },
+                    new RoomAmenities { RoomId = 2, AmenitiesId = 1, },
+                    new RoomAmenities { RoomId = 3, AmenitiesId = 1, },
+
+                    new RoomAmenities { RoomId = 1, AmenitiesId = 2, },
+                    new RoomAmenities { RoomId = 2, AmenitiesId = 2, },
+                    new RoomAmenities { RoomId = 3, AmenitiesId = 2, },
+
+                    new RoomAmenities { RoomId = 3, AmenitiesId = 3, }
+                );
+
+            modelBuilder.Entity<HotelRoom>()
+                .HasData(
+                    new HotelRoom { HotelId = 1, RoomId = 1, RoomNumber = 101, Rate = 100 },
+                    new HotelRoom { HotelId = 1, RoomId = 2, RoomNumber = 202, Rate = 200 },
+                    new HotelRoom { HotelId = 1, RoomId = 3, RoomNumber = 303, Rate = 500 }
+                );
+        }
 
 
 
@@ -88,6 +105,6 @@ namespace AsyncInn.Data
         public DbSet<HotelRoom> HotelRoom { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Amenities> Amenities { get; set; }
-        public DbSet<RoomAmenities> RoomAmenities { get; set;}
+        public DbSet<RoomAmenities> RoomAmenities { get; set; }
     }
 }

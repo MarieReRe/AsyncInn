@@ -84,11 +84,11 @@ namespace AsyncInn.Data.DatabaseRepositories
             return hotels;
         }
 
-        public async Task<Hotel> SaveNewHotel(Hotel hotel)
+        public async Task<HotelDTO> SaveNewHotel(Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
-            return hotel;
+            return await GetHotelById(hotel.Id);
         }
 
         public async Task<bool> UpdateHotel(long id, Hotel hotel)

@@ -42,7 +42,16 @@ namespace AsyncInn.Data.DatabaseRepositories
       
         public async Task<AmenityDTO> GetAmenitiesById(int amenitiesId)
         {
-            return await _context.Amenities.FindAsync(amenitiesId);
+            var amenity = await _context.Amenities
+                 .Select(amenity => new AmenityDTO
+                 {
+                     Id = amenity.Id,
+                     Name = amenity.Name,
+                 })
+                 .FirstOrDefaultAsync(amenity => amenity.Id == amenitiesId);
+
+
+            return amenity;
         }
 
         

@@ -45,18 +45,21 @@ namespace AsyncInn.Data.DatabaseRepositories
         }
 
      
-        public async Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
+        public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
+        public  Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
         {
-            var hotelRooms = await _context.HotelRoom
-                .Select(hotelRooms => new HotelRoomDTO
-                {
 
-                })
+            throw new NotImplementedException();
+
+            //var hotelRooms = await _context.HotelRoom
+            //   .Select(hotelRooms => new HotelRoomDTO
+            //   {
+
+            //   })
         }
 
         public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)
@@ -69,39 +72,39 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public async Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
+        public Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
         {
             throw new NotImplementedException();
         }
 
-      
 
-        public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
+        public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            var hotelRoom = new HotelRoom
-            {
-                RoomNumber = hotelRoomData.RoomNumber,
-                Rate = hotelRoomData.Rate,
-                RoomId = hotelRoomData.RoomId,
-            };
+            throw new NotImplementedException();
+            /* var hotelRoom = new HotelRoom
+             {
+                 RoomNumber = hotelRoomData.RoomNumber,
+                 Rate = hotelRoomData.Rate,
+                 RoomId = hotelRoomData.RoomId,
+             };
 
-            _context.Entry(hotelRoom).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoomExists(id))
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
-            }
+             _context.Entry(hotelRoom).State = EntityState.Modified;
+             try
+             {
+                 await _context.SaveChangesAsync();
+                 return true;
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!RoomExists(id))
+                 {
+                     return false;
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }*/
         }
     }
 }

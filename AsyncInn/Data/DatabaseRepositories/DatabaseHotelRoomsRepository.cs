@@ -67,8 +67,8 @@ namespace AsyncInn.Data.DatabaseRepositories
                         Amenities = hr.Room.Amenities
                             .Select(ra => new AmenityDTO
                             {
-                                Id = ra.Id,
-                                Name = ra.Name,
+                                Id = ra.Amenities.Id,
+                                Name = ra.Amenities.Name,
                             })
                             .ToList(),
                     }

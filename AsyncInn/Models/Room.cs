@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Models
 {
@@ -35,7 +32,7 @@ namespace AsyncInn.Models
 
         //Navigation Properties
         public ICollection<HotelRoom> HotelRoom { get; set; }
-        public ICollection<Amenities> Amenities { get; set; }
+        public ICollection<RoomAmenities> Amenities { get; set; }
     }
     //Flags enum
     public enum Style
@@ -64,5 +61,5 @@ namespace AsyncInn.Models
 
     }
 
-   
+
 }

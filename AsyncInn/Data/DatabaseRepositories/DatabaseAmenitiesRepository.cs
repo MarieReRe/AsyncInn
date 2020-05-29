@@ -91,7 +91,15 @@ namespace AsyncInn.Data.DatabaseRepositories
 
         public async Task<IEnumerable<AmenityDTO>> GetAllRoomAmenities()
         {
-            return await _context.Amenities.ToListAsync();
+            var amenities = await _context.Amenities
+                 .Select(amenity => new AmenityDTO
+                 {
+                     Id = amenity.Id,
+                     Name = amenity.Name,
+                 })
+                 .ToListAsync();
+
+            return amenities;
         }
     }
 }

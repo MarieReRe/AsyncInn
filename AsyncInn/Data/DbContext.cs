@@ -30,12 +30,12 @@ namespace AsyncInn.Data
                 },
                 new Hotel
                 {
-                    Id = 1,
-                    HotelName = "Hotel Vulcano Porto",
-                    StreetAddress = "Via Nazionale 3",
-                    City = "Salina",
-                    State = "Malfa",
-                    Country = "Italy",
+                    Id = 2,
+                    HotelName = "The Loren",
+                    StreetAddress = "116 South Road",
+                    City = "Tucker's Town",
+                    State = "Hamilton Parish",
+                    Country = "Bermuda",
 
 
 

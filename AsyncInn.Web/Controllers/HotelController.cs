@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AsyncInn.Web.Models;
 using AsyncInn.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,45 +26,36 @@ namespace AsyncInn.Web.Controllers
         }
 
         // GET: HotelController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(long id)
         {
-            return View();
+            var hotel = await hotelService.GetHotelById(id);
+            return View(hotel);
         }
-
-        // GET: HotelController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HotelController/Create
+        // POST: Hotel/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task <ActionResult> Create(Hotel hotel)
         {
             try
             {
+
+                await hotelService.Create(hotel);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
-        }
-
-        // GET: HotelController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            
         }
 
         // POST: HotelController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(long id, IFormCollection collection)
         {
             try
             {
+                var hotel = await hotelService.GetHotelById(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

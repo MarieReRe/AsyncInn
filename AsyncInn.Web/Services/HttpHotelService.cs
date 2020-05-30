@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Web.Services
 {
-    public class HttpHotelService
+    public class HttpHotelService: IHotelService
     {
 
         private readonly HttpClient client;
@@ -17,7 +17,7 @@ namespace AsyncInn.Web.Services
         {
             this.client = client;
         }
-        public async Task<HotelSummary> CreateHotel(HotelSummary hotel)
+        public async Task<Hotel> Create(Hotel hotel)
         {
             using (var content = new StringContent(JsonSerializer.Serialize(hotel), System.Text.Encoding.UTF8, "application/json"))
             {
@@ -25,25 +25,27 @@ namespace AsyncInn.Web.Services
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     var responseStream = await response.Content.ReadAsStreamAsync();
-                    HotelSummary result = await JsonSerializer.DeserializeAsync<HotelSummary>(responseStream);
+                    Hotel result = await JsonSerializer.DeserializeAsync<Hotel>(responseStream);
                     return result;
                 }
                 throw new Exception($"Failed to POST data: ({response.StatusCode})");
             }
         }
 
-        public async Task<List<HotelSummary>> GetHotels()
+        public async Task<List<Hotel>> GetHotels()
         {
             var responseStream = await client.GetStreamAsync("Hotels");
-            List<HotelSummary> result = await JsonSerializer.DeserializeAsync<List<HotelSummary>>(responseStream);
+            List<Hotel> result = await JsonSerializer.DeserializeAsync<List<Hotel>>(responseStream);
             return result;
         }
 
-        public async Task<HotelSummary> GetHotelById(long id)
+        public async Task<Hotel> GetHotelById(long id)
         {
             var responseStream = await client.GetStreamAsync($"Hotels/{id}");
-            HotelSummary result = await JsonSerializer.DeserializeAsync<HotelSummary>(responseStream);
+            Hotel result = await JsonSerializer.DeserializeAsync<Hotel>(responseStream);
             return result;
         }
+
+       
     }
 }

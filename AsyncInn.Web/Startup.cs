@@ -1,4 +1,5 @@
 using AsyncInn.Services;
+using AsyncInn.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,8 @@ namespace AsyncInn.Web
             };
             services.AddSingleton<HttpClient>(httpClient);
 
-            services.AddSingleton<IHotelRoomService,HttpHotelRoomService>();
+            services.AddSingleton<IHotelRoomService, HttpHotelRoomService>();
+            services.AddSingleton<IHotelService, HttpHotelService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

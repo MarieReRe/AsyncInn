@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AsyncInn.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,18 @@ namespace AsyncInn.Web.Controllers
 {
     public class HotelController : Controller
     {
-        // GET: HotelController
-        public ActionResult Index()
+        IHotelService hotelService;
+
+        public HotelController(IHotelService hotelService)
         {
-            return View();
+            this.hotelService = hotelService;
+        }
+
+        // GET: HotelController
+        public async Task<ActionResult> Index()
+        {
+            var hotels = await hotelService.GetHotels();
+            return View(hotels.OrderBy(hotels => hotels.HotelName));
         }
 
         // GET: HotelController/Details/5

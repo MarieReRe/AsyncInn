@@ -14,12 +14,11 @@ namespace AsyncInn.Data.Interfaces
         Task<HotelRoomDTO> CreateHotelRoom(CreateHotelRoom hotelRoomData);
         //READ: GET
         Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId);
-        Task<IEnumerable<HotelRoomDTO>> GetHotelRooms();
+        Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId);
 
 
         //UPDATE: PUT
         Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData);
-        Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData);
 
         //DELETE: DELETE
         Task<HotelRoom> RemoveHotelRoom(int roomNumber, long hotelId);

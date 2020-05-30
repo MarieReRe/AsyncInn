@@ -48,10 +48,10 @@ namespace AsyncInn.Data.DatabaseRepositories
                      Style = room.Style.ToString(),
 
                      Amenities = room.Amenities
-                     .Select(amenity => new AmenityDTO
+                     .Select(ra => new AmenityDTO
                      {
-                         Id = amenity.Id,
-                         Name = amenity.Name,
+                         Id = ra.Amenities.Id,
+                         Name = ra.Amenities.Name,
                      })
                      .ToList()
 
@@ -71,10 +71,10 @@ namespace AsyncInn.Data.DatabaseRepositories
                     Style = room.Style.ToString(),
 
                     Amenities = room.Amenities
-                     .Select(amenity => new AmenityDTO
+                     .Select(ra => new AmenityDTO
                      {
-                         Id = amenity.Id,
-                         Name = amenity.Name,
+                         Id = ra.Amenities.Id,
+                         Name = ra.Amenities.Name,
                      })
                      .ToList()
 

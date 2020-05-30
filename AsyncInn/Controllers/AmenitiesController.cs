@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models;
 using AsyncInn.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncInn.Controllers
 {
@@ -29,7 +29,7 @@ namespace AsyncInn.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityDTO>> GetAmenities(int id)
         {
-           var amenities = await amenitiesRepository.GetAmenitiesById(id);
+            var amenities = await amenitiesRepository.GetAmenitiesById(id);
 
             if (amenities == null)
             {
@@ -82,6 +82,6 @@ namespace AsyncInn.Controllers
             return amenities;
         }
 
-        
+
     }
 }

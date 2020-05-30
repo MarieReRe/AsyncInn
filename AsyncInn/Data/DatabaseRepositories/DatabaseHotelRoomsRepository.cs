@@ -50,16 +50,19 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public  Task<IEnumerable<HotelRoomDTO>> GetHotelRooms()
+        public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId)
         {
 
-            throw new NotImplementedException();
+          return await _context.HotelRoom
+                .Where(hr => hr.HotelId == hotelId)
+                .Select(hr => new HotelRoomDTO
+                {
+                    HotelId = hr.HotelId,
+                    RoomNumber = hr.RoomNumber,
+                    Name = hr.Name,
+                    Style = hr.Style, 
 
-            //var hotelRooms = await _context.HotelRoom
-            //   .Select(hotelRooms => new HotelRoomDTO
-            //   {
-
-            //   })
+                })
         }
 
         public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)
@@ -72,10 +75,6 @@ namespace AsyncInn.Data.DatabaseRepositories
             throw new NotImplementedException();
         }
 
-        public Task<HotelRoom> SaveNewHotelRoom(CreateHotelRoom hotelRoomData)
-        {
-            throw new NotImplementedException();
-        }
 
 
         public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)

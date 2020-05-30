@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Web.Models
 {
-    public class Hotel
+    public class HotelSummary
     {
         [JsonPropertyName("Id")]
         public long Id { get; set; }

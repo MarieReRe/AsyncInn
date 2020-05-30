@@ -6,7 +6,8 @@ namespace AsyncInn.Services
 {
     public interface IHotelRoomService
     {
+        Task<HotelRoomSummary> CreateHotelRoom(HotelRoomSummary hotelRoom);
         Task<List<HotelRoomSummary>> GetHotelRooms();
-        Task<HotelRoomSummary> GetHotelRoomById();
+        Task<HotelRoomSummary> GetHotelRoomById(long id);
     }
 }

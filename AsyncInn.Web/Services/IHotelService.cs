@@ -8,7 +8,7 @@ namespace AsyncInn.Web.Services
 {
     public interface IHotelService
     {
-        Task<List<HotelSummary>> GetHotels();
-        Task<HotelSummary> GetHotelById();
+        Task<List<Hotel>> GetHotels();
+        Task<Hotel> GetHotelById();
     }
 }

@@ -17,7 +17,7 @@ namespace AsyncInn.Web.Services
         {
             this.client = client;
         }
-        public async Task<HotelSummary> Create(HotelSummary hotel)
+        public async Task<HotelSummary> CreateHotel(HotelSummary hotel)
         {
             using (var content = new StringContent(JsonSerializer.Serialize(hotel), System.Text.Encoding.UTF8, "application/json"))
             {

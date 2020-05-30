@@ -1,13 +1,11 @@
-﻿using AsyncInn.Data.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Data.DatabaseRepositories
 {
@@ -20,90 +18,112 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context = context;
         }
 
-        public async Task<HotelRoomDTO> CreateHotelRoom(CreateHotelRoom hotelRoomData)
+        public async Task<HotelRoomDTO> CreateHotelRoom(long hotelId, CreateHotelRoom hotelRoomData)
         {
-
-            var room = await _context.Room.FindAsync(hotelRoomData.RoomId);
-            if(room == null)
-            {
-                return null;
-            }
             var hotelRoom = new HotelRoom
             {
-              RoomNumber = hotelRoomData.RoomNumber,
-              Rate = hotelRoomData.Rate,
-              RoomId = hotelRoomData.RoomId,
+                HotelId = hotelId,
+                RoomNumber = hotelRoomData.RoomNumber,
+                Rate = hotelRoomData.Rate,
+                RoomId = hotelRoomData.RoomId,
             };
 
             _context.HotelRoom.Add(hotelRoom);
             await _context.SaveChangesAsync();
 
             // return CreatedAtAction("GetHotelRoom", new { id = hotelRoom.Id }, hotelRoom);
-            var newHotelRoom = await GetHotelRoomById(hotelRoom.RoomNumber, hotelRoomData.RoomId);
+            var newHotelRoom = await GetHotelRoomByNumber(hotelRoom.RoomNumber, hotelRoomData.RoomId);
 
             return newHotelRoom;
         }
 
-     
-        public Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId)
+
+        public async Task<HotelRoomDTO> GetHotelRoomByNumber(int roomNumber, long hotelId)
         {
-            throw new NotImplementedException();
+            return await _context.HotelRoom
+                .Where(hr => hr.HotelId == hotelId)
+                .Where(hr => hr.RoomNumber == roomNumber)
+                .Select(hr => new HotelRoomDTO
+                {
+                    HotelId = hr.HotelId,
+                    RoomNumber = hr.RoomNumber,
+                    Rate = hr.Rate,
+                    Room = new RoomDTO
+                    {
+                        Id = hr.Room.Id,
+                        Name = hr.Room.Name,
+                        Style = hr.Room.Style.ToString(),
+
+                        Amenities = hr.Room.Amenities
+                            .Select(ra => new AmenityDTO
+                            {
+                                Id = ra.Amenities.Id,
+                                Name = ra.Amenities.Name,
+                            })
+                            .ToList(),
+                    }
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId)
         {
-
-          return await _context.HotelRoom
+            return await _context.HotelRoom
                 .Where(hr => hr.HotelId == hotelId)
                 .Select(hr => new HotelRoomDTO
                 {
                     HotelId = hr.HotelId,
                     RoomNumber = hr.RoomNumber,
-                    Name = hr.Name,
-                    Style = hr.Style, 
+                    Rate = hr.Rate,
+                    Room = new RoomDTO
+                    {
+                        Id = hr.Room.Id,
+                        Name = hr.Room.Name,
+                        Style = hr.Room.Style.ToString(),
 
+                        Amenities = hr.Room.Amenities
+                            .Select(ra => new AmenityDTO
+                            {
+                                Id = ra.Amenities.Id,
+                                Name = ra.Amenities.Name,
+                            })
+                            .ToList(),
+                    }
                 })
+                .ToListAsync();
         }
 
-        public Task<HotelRoom> RemoveHotelRoom(int roomId, long hotelId)
+        public async Task<HotelRoomDTO> RemoveHotelRoom(int roomNumber, long hotelId)
         {
-            throw new NotImplementedException();
+            var hotelRoom = await _context.HotelRoom
+                .FirstOrDefaultAsync(hr => hr.HotelId == hotelId && hr.RoomNumber == roomNumber);
+
+            if (hotelRoom == null)
+                return null;
+
+            var hotelRoomToReturn = await GetHotelRoomByNumber(roomNumber, hotelId);
+
+            _context.HotelRoom.Remove(hotelRoom);
+            await _context.SaveChangesAsync();
+
+            return hotelRoomToReturn;
         }
 
-        public Task<HotelRoom> RemoveHotelRoom(long hotelId)
+        public async Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
         {
-            throw new NotImplementedException();
-        }
+            var hotelRoom = await _context.HotelRoom
+                .FirstOrDefaultAsync(hr => hr.HotelId == hotelId && hr.RoomNumber == hotelRoomData.RoomNumber);
 
+            if (hotelRoom == null)
+                return false;
 
+            hotelRoom.Rate = hotelRoomData.Rate;
+            hotelRoom.RoomId = hotelRoomData.RoomId;
 
-        public Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData)
-        {
-            throw new NotImplementedException();
-            /* var hotelRoom = new HotelRoom
-             {
-                 RoomNumber = hotelRoomData.RoomNumber,
-                 Rate = hotelRoomData.Rate,
-                 RoomId = hotelRoomData.RoomId,
-             };
+            _context.Entry(hotelRoom).State = EntityState.Modified;
 
-             _context.Entry(hotelRoom).State = EntityState.Modified;
-             try
-             {
-                 await _context.SaveChangesAsync();
-                 return true;
-             }
-             catch (DbUpdateConcurrencyException)
-             {
-                 if (!RoomExists(id))
-                 {
-                     return false;
-                 }
-                 else
-                 {
-                     throw;
-                 }
-             }*/
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

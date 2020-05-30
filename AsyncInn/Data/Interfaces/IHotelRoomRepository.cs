@@ -1,19 +1,16 @@
-﻿using AsyncInn.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AsyncInn.Models.ApiRecievals;
 using AsyncInn.Models.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
     public interface IHotelRoomRepository
     {
         // Create: POST
-        Task<HotelRoomDTO> CreateHotelRoom(CreateHotelRoom hotelRoomData);
+        Task<HotelRoomDTO> CreateHotelRoom(long hotelId, CreateHotelRoom hotelRoomData);
         //READ: GET
-        Task<HotelRoomDTO> GetHotelRoomById(int roomNumber, long hotelId);
+        Task<HotelRoomDTO> GetHotelRoomByNumber(int roomNumber, long hotelId);
         Task<IEnumerable<HotelRoomDTO>> GetHotelRooms(long hotelId);
 
 
@@ -21,6 +18,6 @@ namespace AsyncInn.Data.Interfaces
         Task<bool> UpdateHotelRooms(long hotelId, CreateHotelRoom hotelRoomData);
 
         //DELETE: DELETE
-        Task<HotelRoom> RemoveHotelRoom(int roomNumber, long hotelId);
+        Task<HotelRoomDTO> RemoveHotelRoom(int roomNumber, long hotelId);
     }
 }

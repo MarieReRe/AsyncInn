@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AsyncInn.Data;
-using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models;
 using AsyncInn.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncInn.Controllers
 {
@@ -16,7 +11,8 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        IRoomRepository roomRepository;
+        private readonly IRoomRepository roomRepository;
+
         public RoomsController(IRoomRepository roomRepository)
         {
             this.roomRepository = roomRepository;
@@ -33,7 +29,7 @@ namespace AsyncInn.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomDTO>> GetRoom(long id)
         {
-           RoomDTO room = await roomRepository.GetRoomById(id);
+            RoomDTO room = await roomRepository.GetRoomById(id);
 
             if (room == null)
             {
@@ -44,7 +40,7 @@ namespace AsyncInn.Controllers
         }
 
         // PUT: api/Rooms/5
- 
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRoom(long id, Room room)
         {
@@ -55,12 +51,12 @@ namespace AsyncInn.Controllers
 
             bool updatedRoom = await roomRepository.UpdateRoom(id, room);
 
-           
-                if (!updatedRoom)
-                {
-                    return NotFound();
-                }
-              
+
+            if (!updatedRoom)
+            {
+                return NotFound();
+            }
+
 
             return NoContent();
         }
@@ -88,12 +84,8 @@ namespace AsyncInn.Controllers
         }
 
         //AMENITIES GO HERE 
-        /*
-         * create
-           delete
-         */
-        //POST: api/Rooms/5/Amenities/17
 
+        // POST: api/Rooms/5/Amenities/17
         [HttpPost("{roomId}/Amenities/{amenityId}")]
         public async Task<ActionResult> AddRoomAmenity(long roomId, int amenityId)
         {
@@ -101,14 +93,12 @@ namespace AsyncInn.Controllers
             return NoContent();
         }
 
-        [HttpPost("{roomId}/Amenities/{amenityId}")]
+        // DELETE: api/Rooms/5/Amenities/17
+        [HttpDelete("{roomId}/Amenities/{amenityId}")]
         public async Task<ActionResult> RemoveRoomAmenity(long roomId, int amenityId)
         {
             await roomRepository.RemoveAmenityFromRoom(amenityId, roomId);
             return NoContent();
         }
-
-
-
     }
 }

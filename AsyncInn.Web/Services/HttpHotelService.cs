@@ -17,7 +17,20 @@ namespace AsyncInn.Web.Services
         {
             this.client = client;
         }
-
+        public async Task<HotelSummary> Create(HotelSummary hotel)
+        {
+            using (var content = new StringContent(JsonSerializer.Serialize(hotel), System.Text.Encoding.UTF8, "application/json"))
+            {
+                var response = await client.PostAsync("Hotel", content);
+                if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                {
+                    var responseStream = await response.Content.ReadAsStreamAsync();
+                    HotelSummary result = await JsonSerializer.DeserializeAsync<HotelSummary>(responseStream);
+                    return result;
+                }
+                throw new Exception($"Failed to POST data: ({response.StatusCode})");
+            }
+        }
 
         public async Task<List<HotelSummary>> GetHotels()
         {

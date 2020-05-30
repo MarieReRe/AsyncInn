@@ -35,7 +35,7 @@ namespace AsyncInn.Models
 
         //Navigation Properties
         public ICollection<HotelRoom> HotelRoom { get; set; }
-        public ICollection<Amenities> Amenities { get; set; }
+        public ICollection<RoomAmenities> Amenities { get; set; }
     }
     //Flags enum
     public enum Style

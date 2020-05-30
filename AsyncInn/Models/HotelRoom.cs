@@ -26,5 +26,6 @@ namespace AsyncInn.Models
         public Room Room { get; set; }
 
         public long RoomId { get; set; }
+        public string Name { get; internal set; }
     }
 }

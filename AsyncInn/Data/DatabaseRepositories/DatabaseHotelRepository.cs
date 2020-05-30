@@ -1,11 +1,10 @@
-﻿using AsyncInn.Data.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Data.DatabaseRepositories
 {
@@ -20,7 +19,7 @@ namespace AsyncInn.Data.DatabaseRepositories
 
 
 
-        public async Task<Hotel> CreateHotel( Hotel hotel)
+        public async Task<Hotel> CreateHotel(Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
@@ -30,7 +29,7 @@ namespace AsyncInn.Data.DatabaseRepositories
         public async Task<Hotel> DeleteHotel(long id)
         {
             var hotel = await _context.Hotel.FindAsync(id);
-            if(hotel == null)
+            if (hotel == null)
             {
                 return null;
             }
@@ -40,7 +39,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             return hotel;
 
         }
-      
+
         public async Task<HotelDTO> GetHotelById(long id)
         {
             var hotel = await _context.Hotel
@@ -52,6 +51,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                     State = hotel.State,
                     Country = hotel.Country,
 
+                    // TODO: HotelRoom = 
                 })
                 .FirstOrDefaultAsync(hotel => hotel.Id == id);
 
@@ -71,12 +71,25 @@ namespace AsyncInn.Data.DatabaseRepositories
                     Country = hotel.Country,
 
                     HotelRoom = hotel.HotelRoom
-                    .Select(hotelRoom => new HotelRoomDTO
+                    .Select(hr => new HotelRoomDTO
                     {
-                        Name = hotelRoom.Hotel.HotelName,
-                        HotelId = hotelRoom.HotelId,
-                        Rate = hotelRoom.Rate,
+                        HotelId = hr.HotelId,
+                        Rate = hr.Rate,
+                        RoomNumber = hr.RoomNumber,
+                        Room = new RoomDTO
+                        {
+                            Id = hr.Room.Id,
+                            Name = hr.Room.Name,
+                            Style = hr.Room.Style.ToString(),
 
+                            Amenities = hr.Room.Amenities
+                                .Select(ra => new AmenityDTO
+                                {
+                                    Id = ra.Amenities.Id,
+                                    Name = ra.Amenities.Name,
+                                })
+                                .ToList(),
+                        }
                     })
                     .ToList()
                 })
@@ -100,9 +113,9 @@ namespace AsyncInn.Data.DatabaseRepositories
                 return true;
 
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
-                if(!HotelExists(id))
+                if (!HotelExists(id))
                 {
                     return false;
                 }
@@ -113,7 +126,7 @@ namespace AsyncInn.Data.DatabaseRepositories
             }
         }
 
-        
+
 
         private bool HotelExists(long id)
         {

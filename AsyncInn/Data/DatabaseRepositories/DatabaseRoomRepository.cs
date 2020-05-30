@@ -1,11 +1,10 @@
-﻿using AsyncInn.Data.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using AsyncInn.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AsyncInn.Data.DatabaseRepositories
 {
@@ -17,7 +16,7 @@ namespace AsyncInn.Data.DatabaseRepositories
         public DatabaseRoomRepository(AsyncInnDbContext context)
         {
             _context = context;
-        } 
+        }
 
         public async Task<Room> CreateRoom(Room room)
         {
@@ -29,7 +28,7 @@ namespace AsyncInn.Data.DatabaseRepositories
         public async Task<Room> DeleteRoom(long id)
         {
             var room = await _context.Room.FindAsync(id);
-            if(room == null)
+            if (room == null)
             {
                 return null;
             }
@@ -48,10 +47,10 @@ namespace AsyncInn.Data.DatabaseRepositories
                      Style = room.Style.ToString(),
 
                      Amenities = room.Amenities
-                     .Select(amenity => new AmenityDTO
+                     .Select(ra => new AmenityDTO
                      {
-                         Id = amenity.Id,
-                         Name = amenity.Name,
+                         Id = ra.Amenities.Id,
+                         Name = ra.Amenities.Name,
                      })
                      .ToList()
 
@@ -71,10 +70,10 @@ namespace AsyncInn.Data.DatabaseRepositories
                     Style = room.Style.ToString(),
 
                     Amenities = room.Amenities
-                     .Select(amenity => new AmenityDTO
+                     .Select(ra => new AmenityDTO
                      {
-                         Id = amenity.Id,
-                         Name = amenity.Name,
+                         Id = ra.Amenities.Id,
+                         Name = ra.Amenities.Name,
                      })
                      .ToList()
 
@@ -82,7 +81,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 .ToListAsync();
 
 
-        return rooms;
+            return rooms;
         }
 
         public async Task<bool> UpdateRoom(long id, Room room)
@@ -93,7 +92,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
                 if (!RoomExists(id))
                 {
@@ -104,7 +103,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                     throw;
                 }
             }
-            
+
         }
 
         public bool RoomExists(long id)
@@ -116,6 +115,31 @@ namespace AsyncInn.Data.DatabaseRepositories
             _context.Room.Add(room);
             await _context.SaveChangesAsync();
             return room;
+        }
+
+        public async Task AddAmenityToRoom(int amenityId, long roomId)
+        {
+            var roomAmenity = new RoomAmenities
+            {
+                AmenitiesId = amenityId,
+                RoomId = roomId,
+            };
+            _context.RoomAmenities.Add(roomAmenity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveAmenityFromRoom(int amenityId, long roomId)
+        {
+            var roomAmenity = await _context.RoomAmenities
+                .Where(ra => ra.AmenitiesId == amenityId)
+                .Where(ra => ra.RoomId == roomId)
+                .FirstOrDefaultAsync();
+
+            if (roomAmenity != null)
+            {
+                _context.RoomAmenities.Remove(roomAmenity);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

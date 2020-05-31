@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncInn.Web.Controllers
 {
-    public class HotelController : Controller
+    public class HotelsController : Controller
     {
         IHotelService hotelService;
 
-        public HotelController(IHotelService hotelService)
+        public HotelsController(IHotelService hotelService)
         {
             this.hotelService = hotelService;
         }

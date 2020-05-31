@@ -21,7 +21,7 @@ namespace AsyncInn.Web.Services
         {
             using (var content = new StringContent(JsonSerializer.Serialize(hotel), System.Text.Encoding.UTF8, "application/json"))
             {
-                var response = await client.PostAsync("Hotel", content);
+                var response = await client.PostAsync("Hotels", content);
                 if (response.StatusCode == System.Net.HttpStatusCode.Created)
                 {
                     var responseStream = await response.Content.ReadAsStreamAsync();

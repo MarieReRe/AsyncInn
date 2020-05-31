@@ -47,6 +47,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 {
                     Id = hotel.Id,
                     Name = hotel.HotelName,
+                    StreetAddress = hotel.StreetAddress,
                     City = hotel.City,
                     State = hotel.State,
                     Country = hotel.Country,
@@ -66,6 +67,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 {
                     Id = hotel.Id,
                     Name = hotel.HotelName,
+                    StreetAddress = hotel.StreetAddress,
                     City = hotel.City,
                     State = hotel.State,
                     Country = hotel.Country,

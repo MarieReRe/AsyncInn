@@ -9,11 +9,12 @@ namespace AsyncInn.Web.Models
 {
     public class Hotel
     {
-        [JsonPropertyName("Id")]
+        //needs to be lowercase
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
 
-        [JsonPropertyName("hotelName")]
+        [JsonPropertyName("name")]
         [Display(Name = "Hotel Name")]
         public string HotelName { get; set; }
 

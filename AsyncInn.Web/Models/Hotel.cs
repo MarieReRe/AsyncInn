@@ -14,7 +14,7 @@ namespace AsyncInn.Web.Models
         public long Id { get; set; }
 
 
-        [JsonPropertyName("name")]
+        [JsonPropertyName("hotelName")]
         [Display(Name = "Hotel Name")]
         public string HotelName { get; set; }
 

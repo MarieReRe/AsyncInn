@@ -46,7 +46,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 .Select(hotel => new HotelDTO
                 {
                     Id = hotel.Id,
-                    Name = hotel.HotelName,
+                    HotelName = hotel.HotelName,
                     StreetAddress = hotel.StreetAddress,
                     City = hotel.City,
                     State = hotel.State,
@@ -66,7 +66,7 @@ namespace AsyncInn.Data.DatabaseRepositories
                 .Select(hotel => new HotelDTO
                 {
                     Id = hotel.Id,
-                    Name = hotel.HotelName,
+                    HotelName = hotel.HotelName,
                     StreetAddress = hotel.StreetAddress,
                     City = hotel.City,
                     State = hotel.State,

@@ -8,7 +8,7 @@ namespace AsyncInn.Models.DTOs
     public class HotelDTO
     {
         public long Id { get; set; }
-        public string Name { get; set; }
+        public string HotelName { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }

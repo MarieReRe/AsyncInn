@@ -28,6 +28,7 @@ namespace AsyncInn.Web.Services
                     Hotel result = await JsonSerializer.DeserializeAsync<Hotel>(responseStream);
                     return result;
                 }
+                var errorBody = await response.Content.ReadAsStringAsync();
                 throw new Exception($"Failed to POST data: ({response.StatusCode})");
             }
         }
@@ -46,6 +47,27 @@ namespace AsyncInn.Web.Services
             return result;
         }
 
-       
+        public async Task<Hotel> Delete(long id)
+        {
+            var responseStream = await client.GetStreamAsync($"Hotels/{id}");
+            Hotel result = await JsonSerializer.DeserializeAsync<Hotel>(responseStream);
+            return result;
+        }
+
+        public async Task<Hotel> Edit(long id, Hotel hotel)
+        {
+            //makes a JSON string of the hotel
+            using (var content = new StringContent(JsonSerializer.Serialize(hotel), System.Text.Encoding.UTF8, "application/json"))
+            {
+                var response = await client.PutAsync($"Hotels/{id}", content);
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    
+                    return hotel;
+                }
+                var errorBody = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Failed to POST data: ({response.StatusCode})");
+            }
+        }
     }
 }

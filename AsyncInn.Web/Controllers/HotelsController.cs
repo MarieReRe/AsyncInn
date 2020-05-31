@@ -31,6 +31,12 @@ namespace AsyncInn.Web.Controllers
             var hotel = await hotelService.GetHotelById(id);
             return View(hotel);
         }
+        //GET: Hotel/Create
+        // GET: HotelController/Delete/5
+        public ActionResult Create()
+        {
+            return View();
+        }
         // POST: Hotel/Create
         [HttpPost]
         public async Task <ActionResult> Create(Hotel hotel)
@@ -47,15 +53,21 @@ namespace AsyncInn.Web.Controllers
             }
             
         }
+        // Get: HotelController/Edit/5
+        public async Task<ActionResult> Edit(long id)
+        {
+            var hotel = await hotelService.GetHotelById(id);
+            return View(hotel);
+        }
 
         // POST: HotelController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(long id, IFormCollection collection)
+        public async Task<ActionResult> Edit(long id, Hotel hotel)
         {
             try
             {
-                var hotel = await hotelService.GetHotelById(id);
+                await hotelService.Edit(id, hotel);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -65,18 +77,20 @@ namespace AsyncInn.Web.Controllers
         }
 
         // GET: HotelController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task <ActionResult> Delete(long id)
         {
-            return View();
+           var hotel = await hotelService.GetHotelById(id);
+            return View(hotel);
         }
 
         // POST: HotelController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task <ActionResult> Delete(long id, IFormCollection collection)
         {
             try
             {
+                await hotelService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -47,11 +47,12 @@ namespace AsyncInn.Web.Services
             return result;
         }
 
-        public async Task<Hotel> Delete(long id)
+        public async Task Delete(long id)
         {
-            var responseStream = await client.GetStreamAsync($"Hotels/{id}");
-            Hotel result = await JsonSerializer.DeserializeAsync<Hotel>(responseStream);
-            return result;
+           var response = await client.DeleteAsync($"Hotels/{id}");
+            response.EnsureSuccessStatusCode();
+           
+           
         }
 
         public async Task<Hotel> Edit(long id, Hotel hotel)

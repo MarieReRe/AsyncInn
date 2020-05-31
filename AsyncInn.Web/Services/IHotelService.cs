@@ -11,7 +11,7 @@ namespace AsyncInn.Web.Services
         Task<List<Hotel>> GetHotels();
         Task<Hotel> GetHotelById(long id);
         Task<Hotel> Create(Hotel hotel);
-        Task<Hotel> Delete(long id);
+        Task Delete(long id);
         Task<Hotel> Edit(long id, Hotel hotel);
         
     }

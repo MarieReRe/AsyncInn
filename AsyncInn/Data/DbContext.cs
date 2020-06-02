@@ -27,7 +27,19 @@ namespace AsyncInn.Data
                     City = "Salina",
                     State = "Malfa",
                     Country = "Italy",
-                });
+                },
+                new Hotel
+                {
+                    Id = 2,
+                    HotelName = "The Loren",
+                    StreetAddress = "116 South Road",
+                    City = "Tucker's Town",
+                    State = "Hamilton Parish",
+                    Country = "Bermuda",
+
+
+
+                }) ; 
 
             modelBuilder.Entity<HotelRoom>()
                 .HasKey(hotelRoom => new
@@ -44,11 +56,7 @@ namespace AsyncInn.Data
                     Style = Style.CoastalView,
                     MaxGuests = 2,
                     BedCount = 1,
-                    BedStyle = BedStyle.QueenSize,
-
-
-                 
-                    
+                    BedStyle = BedStyle.QueenSize,  
                 },
                 new Room
                 {
@@ -77,6 +85,31 @@ namespace AsyncInn.Data
                     roomAmenities.RoomId
 
                 }) ;
+
+
+            modelBuilder.Entity<Amenities>()
+              .HasData(
+                  new Amenities 
+                  { 
+                      Id = 1,
+                      Name = "In-Room Spa Service"
+                  },
+                  new Amenities
+                  { 
+                      Id = 2,
+                      Name = "Nespresso"
+                  },
+                  new Amenities
+                  {
+                      Id = 3,
+                      Name = "Mini Bar"
+                  },
+                  new Amenities
+                  { 
+                      Id = 4, 
+                      Name = "Large Screen TV" 
+                  }
+         );
 
 
         }  

@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AsyncInn.Services;
+using AsyncInn.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Net.Http;
 
 namespace AsyncInn.Web
 {
@@ -26,9 +24,14 @@ namespace AsyncInn.Web
         {
             services.AddControllersWithViews();
 
+            var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(Configuration.GetValue<string>("API_URL")),
+            };
+            services.AddSingleton<HttpClient>(httpClient);
 
-
-            services.AddSingleton<IHotelRoomService,HttpHotelRoomService>();
+            services.AddSingleton<IHotelRoomService, HttpHotelRoomService>();
+            services.AddSingleton<IHotelService, HttpHotelService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

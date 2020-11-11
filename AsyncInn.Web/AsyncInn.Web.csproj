@@ -9,7 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Photos\" />
+    <Folder Include="Views\HotelRooms\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Photos\bda.jpg" />
   </ItemGroup>
 
 </Project>

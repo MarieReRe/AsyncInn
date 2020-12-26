@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "_Layout";
 }
 
 <h1>Welcome to Async Inn</h1>
@@ -55,10 +56,18 @@
                 @Html.DisplayFor(modelItem => item.Country)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { item.Id }) |
-                @Html.ActionLink("Details", "Details", new { item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { item.Id })
-            </td>
+                <button class="btn btn-primary far fa-edit">
+                    @Html.ActionLink("Edit", "Edit", new { item.Id })
+                </button>
+                |
+                <button class="btn btn-primary fas fa-info">
+                    @Html.ActionLink("Details", "Details", new { item.Id })
+                </button>
+                |
+                <button class="btn btn-primary far fa-trash-alt">
+                        @Html.ActionLink("Delete", "Delete", new { item.Id })
+                </button>
+</td>
         </tr>
 }
     </tbody>

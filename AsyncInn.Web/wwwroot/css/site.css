@@ -9,19 +9,19 @@ a.navbar-brand {
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #011c3d;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #ffdbe0;
+    border-color: #ffccd4;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #ffccd4;
+    border-color: #ffb6c1;
 }
 
 /* Sticky footer styles
@@ -59,8 +59,12 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    text-align: center;
+    min-width: 900px;
+/*Hello*/
+
 }
 .footer {
   position: absolute;
@@ -74,5 +78,21 @@ body {
 .card {
     padding: 10px 10px 10px 10px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    width:auto;
+    width: auto;
+    background-color: #d3d3d3;
+}
+
+
+
+/*Font Awesome Icons*/
+
+.fa-edit {
+    color: black
+}
+
+.fa-info {
+    color: black
+}
+.fa-trash-alt {
+    color: black
 }

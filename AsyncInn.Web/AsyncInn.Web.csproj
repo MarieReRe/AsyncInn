@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\HotelRooms\" />
+    <Folder Include="Views\HotelRooms\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

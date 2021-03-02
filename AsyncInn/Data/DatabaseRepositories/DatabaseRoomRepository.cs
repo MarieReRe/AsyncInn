@@ -117,6 +117,12 @@ namespace AsyncInn.Data.DatabaseRepositories
             return room;
         }
 
+
+
+
+
+
+
         public async Task AddAmenityToRoom(int amenityId, long roomId)
         {
             var roomAmenity = new RoomAmenities

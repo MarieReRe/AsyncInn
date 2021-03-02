@@ -8,4 +8,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\HotelRooms\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Photos\bda.jpg" />
+  </ItemGroup>
+
 </Project>

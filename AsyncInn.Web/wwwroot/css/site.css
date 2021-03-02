@@ -62,7 +62,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     text-align: center;
-    min-width: 900px;
+    min-width: 480px;
 /*Hello*/
 
 }
@@ -95,4 +95,55 @@ body {
 }
 .fa-trash-alt {
     color: black
+}
+
+
+/*-------------------------------------Login Styles Index-----------------------------------------------------*/
+.bodyContainer {
+    width: 480px;
+    display: grid;
+    text-align:center;
+    grid-template-columns: 240px 240px;
+    grid-template-rows: 100px 75px 75px 75px 100px;
+}
+
+.logo{
+    grid-column: span 2;
+    grid-row: 1;
+    height: 200px;
+    width: 200px;
+    background-color:skyblue;
+    border-radius:50%;
+    margin-left: 145px;
+    margin-top:30px;
+    z-index: -1;
+
+
+}
+text {
+    grid-column:span 2;
+    font-family: 'Playfair Display', serif;
+    text-align:center;
+    font-size:x-large;
+
+}
+
+aside{
+    grid-column: span 2;
+    grid-row-start: 4;
+    grid-row-end:6;
+
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+@media (min-width:414px){
+
 }

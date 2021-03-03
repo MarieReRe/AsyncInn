@@ -18,6 +18,8 @@ namespace AsyncInn.Models
 
         [Required]
         [Display(Name = "Rate")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString ="{0:C2}")]
         public decimal Rate { get; set; }
 
         //Refrences to other tables
